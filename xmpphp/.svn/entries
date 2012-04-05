@@ -1,0 +1,106 @@
+8
+
+dir
+76
+svn://netflint.net/xmpphp
+svn://netflint.net/xmpphp
+
+
+
+2009-03-16T14:04:15.599819Z
+76
+fritzy
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ef36c318-a008-4979-b6e8-6b496270793b
+
+sendmessage_example.php
+file
+
+
+
+
+2009-07-26T16:57:55.000000Z
+2e673e863d54ecddb5191e7eb0ca7bd2
+2008-08-28T23:07:45.133703Z
+53
+temp
+
+tests
+dir
+
+LICENSE
+file
+
+
+
+
+2009-07-26T16:57:55.000000Z
+8dc8962cb31fd9af75dc3075f356a96e
+2008-10-15T18:08:35.917154Z
+60
+fritzy
+
+cli_longrun_example_bosh.php
+file
+
+
+
+
+2009-07-26T16:57:55.000000Z
+b4985d92fff774d456a79443faa4ffda
+2008-09-19T10:35:37.462723Z
+55
+fritzy
+
+XMPPHP
+dir
+
+cli_longrun_example.php
+file
+
+
+
+
+2009-07-26T16:57:55.000000Z
+c1a396c1a529024ceaaa5b3c5489393f
+2008-11-28T20:15:36.957684Z
+72
+fritzy
+
+README
+file
+
+
+
+
+2009-07-26T16:57:55.000000Z
+9ea6b444b7ead7492d099346f9d6b367
+2008-11-28T19:43:05.465409Z
+71
+fritzy
+
+webclient_example.php
+file
+
+
+
+
+2009-07-26T16:57:55.000000Z
+dfef05c747a7de2582501ed69154d30c
+2008-09-19T12:03:29.545616Z
+56
+fritzy
+
