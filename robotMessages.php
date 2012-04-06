@@ -33,6 +33,7 @@
 	<!-- messageToRobot -->
 	<?xml version="1.0" standalone="yes"?>
 	<m> 
+		<t>timeStamp</t> 
 		<d>driverAddr</d> 
 		<dn>driverName</dn>
 		<r>robotAddr</r> 
@@ -44,6 +45,7 @@
 	<!-- messageFromRobot -->
 	<?xml version="1.0" standalone="yes"?>
 	<m> 
+		<t>timeStamp</t> 
 		<d>driverAddr</d> 
 		<r>robotAddr</r> 
 		<re>responseValue</re>
@@ -60,7 +62,7 @@ class robotMessages
 //		http://php.net/manual/en/book.simplexml.php
 //
 // Also provides the default constructor to count arguments because because PHP doesn't 
-// support method overloading.
+// support method overloading, and sets the microtime() timestamp of its instantiation 
 {
 	// for messages to robot from driver
 	public $driverAddr;
@@ -75,8 +77,12 @@ class robotMessages
 	
 	public $XML; // simpleXML type
 	
+	public $timeStamp; //when it was created  - time.microtime() (float)
+	
 	function __construct() 
     { 
+    	$this->timeStamp = microtime(true); // get timestamp at instantiation
+    	
     	// default constructor because PHP doesn't support overloading
         $a = func_get_args(); 
         $i = func_num_args(); 
@@ -99,6 +105,7 @@ class messageToRobot extends robotMessages
 	{
 		// parse XML string to create simpleXML element 
 		$this->XML = new simpleXMLElement($xmlStr); 
+		$this->XML->addChild('t', $this->timeStamp);
 		
 		// set the class' properties from the parsed XML element (if there's no corresponding XML element, they're just empty)
 		$this->driverAddr = (string)$this->XML->d;
@@ -122,6 +129,7 @@ class messageToRobot extends robotMessages
 		
 		// now build the $this->XML property from what you've already set
 		$this->XML = new SimpleXMLElement("<m></m>");
+		$this->XML->addChild('t', $this->timeStamp);
 		$this->XML->addChild('d', $this->driverAddr);
 		$this->XML->addChild('dn', $this->driverName);
 		$this->XML->addChild('r', $this->robotAddr);
@@ -140,6 +148,7 @@ class messageToRobot extends robotMessages
 		
 		// now build the $this->XML property from what you've already set
 		$this->XML = new SimpleXMLElement("<m></m>");
+		$this->XML->addChild('t', $this->timeStamp);
 		$this->XML->addChild('d', $this->driverAddr);
 		$this->XML->addChild('dn', $this->driverName);
 		$this->XML->addChild('r', $this->robotAddr);
@@ -159,6 +168,7 @@ class messageToRobot extends robotMessages
 		
 		// now build the $this->XML property from what you've already set
 		$this->XML = new SimpleXMLElement("<m></m>");
+		$this->XML->addChild('t', $this->timeStamp);
 		$this->XML->addChild('d', $this->driverAddr);
 		$this->XML->addChild('dn', $this->driverName);
 		$this->XML->addChild('r', $this->robotAddr);
@@ -181,6 +191,7 @@ class messageFromRobot extends robotMessages
 	{
 		// parse XML string to create simpleXML element 
 		$this->XML = new simpleXMLElement($xmlStr);
+		$this->XML->addChild('t', $this->timeStamp);
 		
 		// set the class' properties from the parsed XML element (if there's no corresponding XML element, they're just empty)
 		$this->driverAddr = (string)$this->XML->d;
@@ -200,6 +211,7 @@ class messageFromRobot extends robotMessages
 		
 		// now build the $this->XML property from what you've already set
 		$this->XML = new SimpleXMLElement("<m></m>");
+		$this->XML->addChild('t', $this->timeStamp);
 		$this->XML->addChild('d', $this->driverAddr);
 		$this->XML->addChild('r', $this->robotAddr);
 		$this->XML->addChild('re', $this->responseValue);
@@ -215,6 +227,7 @@ class messageFromRobot extends robotMessages
 		
 		// now build the $this->XML property from what you've already set
 		$this->XML = new SimpleXMLElement("<m></m>");
+		$this->XML->addChild('t', $this->timeStamp);
 		$this->XML->addChild('d', $this->driverAddr);
 		$this->XML->addChild('r', $this->robotAddr);
 		$this->XML->addChild('re', $this->responseValue);
@@ -283,4 +296,5 @@ function robotMessagesTestSuite ()
 	print_r($messageToRobot);
 }
 
+robotMessagesTestSuite();
 ?>
