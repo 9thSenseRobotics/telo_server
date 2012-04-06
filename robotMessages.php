@@ -18,7 +18,31 @@
 
      You should have received a copy of the GNU General Public License
      along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+	 ----------------------------------------------------------------------------------
+	 XML formats for messages to and from robot
+	 ----------------------------------------------------------------------------------
+	 
+	<!-- messageToRobot -->
+	<?xml version="1.0" standalone="yes"?>
+	<m> 
+		<d>driverAddr</d> 
+		<dn>driverName</dn>
+		<r>robotAddr</r> 
+		<c>commandChar</c>
+		<a>commandArguments</a>
+		<co>comment</co>
+	</m>
 	
+	<!-- messageFromRobot -->
+	<?xml version="1.0" standalone="yes"?>
+	<m> 
+		<d>driverAddr</d> 
+		<r>robotAddr</r> 
+		<re>responseValue</re>
+		<co>comment</co>
+	</m>
+	 	
 */
 
 class robotMessages 
