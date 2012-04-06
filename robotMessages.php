@@ -20,8 +20,15 @@
      along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 	 ----------------------------------------------------------------------------------
-	 XML formats for messages to and from robot
+	 Once instantiated, you can reference the contents by $theObject->driverAddr, 
+	 $theObject->robotAddr, etc.
+	 
+	 To output the contents as XML for sending, use $theObject->XML->asXML();
+	 
+	 See child classes for comments on constructors 
 	 ----------------------------------------------------------------------------------
+	 
+	 Here are the XML formats for messages to and from robot. 
 	 
 	<!-- messageToRobot -->
 	<?xml version="1.0" standalone="yes"?>
