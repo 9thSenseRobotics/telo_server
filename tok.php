@@ -98,7 +98,7 @@ function pantilt_up()
 
 function pantilt_down()
 {
-	send_pantilt_command('n');
+	send_pantilt_command('d');
 }
 
 // function pantilt_left()
@@ -276,10 +276,6 @@ function keyboard_on_keydown_stop_on_keyup()
 	jQuery(document).ready(function() {
 		// initialize with driving on keydown and stopping on keyup
 		keyboard_on_keydown_stop_on_keyup(); 
-
-		$("#qConnect").click(function() {
-			send_base_command('c');
-		});		
 		$("#button-pantilt-right").click(function() {
 			pantilt_right();
 		});		
@@ -364,9 +360,9 @@ function keyboard_on_keydown_stop_on_keyup()
 				<option value="litebot@9thsense.com">litebot@9thsense.com</option>
 				<option value="droidbot@9thsense.com">droidbot@9thsense.com</option>
 		</div>-->
-		<span id="qConnect">Query connect status</span>
 		<input type="hidden" id="robotAddr" name="robotAddr" value="droidbot@9thsense.com" />
 	</div>
+<iframe id="videoEmbed" src="http://api.opentok.com/hl/embed/2emb99cdd927a98e1458221031e8702173229aeb" width="350" height="265" style="border:none" frameborder="0"></iframe>
 	<div id="nav-response">
 		<div class="baseresult"><span>Stopped</span></div><br />
 		<!--<div class="pantiltresult">N/A</div><br />-->

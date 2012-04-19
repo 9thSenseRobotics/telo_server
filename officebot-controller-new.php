@@ -6,6 +6,33 @@ function is_valid_create_command($cmd)
 // make sure it's a command we understand
 { 
 	return ($cmd);
+	
+// 	switch ($cmd)
+// 	{
+// 		case 'i':
+// 		case 'o':
+// 		case 'F':
+// 		case 'B':
+// 		case 'c':
+// 		case 'l':
+// 		case 's':
+// 		case 'x':
+// 		case 'I':
+// 		case 'O':
+// 		case 'C':
+// 		case 'L':
+// 		case 'S':
+// 		case 'X':
+// 		case 'a':
+// 		case 'A':
+// 		case 'd':
+// 		case 'D':
+// 		case 'aa':
+// 		case 'ddd':
+// 			return ($cmd);
+// 		default: 
+// 			return (false);
+// 	}
 }
 
 function is_valid_robot_command($cmd)
@@ -44,6 +71,35 @@ function robot_command($cmd)
 }
 
 
+function pantilt_up() 
+{
+	robot_command ('u');
+}
+
+function pantilt_down() 
+{
+	robot_command ('n');
+}
+
+function pantilt_left() 
+{
+	robot_command ('h');
+}
+
+function pantilt_right() 
+{
+	robot_command ('k');
+}
+function pantilt_center() 
+{
+	robot_command ('j');
+}
+
+function robot_stop() 
+{
+	robot_command('x');
+}
+
 	header("Content-type: text/json");
 	if (isset ($_REQUEST['cmd']))
 	{
@@ -58,6 +114,6 @@ function robot_command($cmd)
 	{
 		echo ($json);
 	} else {
-		echo (json_encode(array('status' => 'failed')));
-	}
+		echo (json_encode('status' => 'failed'));
+	
 ?>
