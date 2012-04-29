@@ -1,382 +1,320 @@
-<html>
-<head>
+<?php
+	// set up swiftmailer
+	require ('Swift-4.1.7/lib/swift_required.php');
+	$transporter = Swift_SmtpTransport::newInstance('smtp.gmail.com', 465, 'ssl')
+	  ->setUsername('mailer@9thsense.com')
+	  ->setPassword('fmer!13rmERKM');
+	$mailer = Swift_Mailer::newInstance($transporter);
 
-<title>9th Sense</title>
-<style type="text/css">
-	div#nav-response {
-		display: none;
-	}
-	div#container {
-		width: 100%;
-		margin-left: 150px;
-		margin-top: 20px;
-	}
-	div#nav-reports {
-		width: 25%;
-		float: left;
-		margin: 15px;
-		padding: 10px;
-	}
-	div#nav-controls {
-		width: 25%;
-		float: left;
-		margin: auto;
-		padding: 10px;
-		text-align: center;
-	}
-	div#pri-video {
-		width: 25%;
-		float: left;
-		margin: 15px;
-		padding: 10px;
-	}
-	p.nav-title {
-		font-size: 32px;
-		color: #bbbbbb;
-	}	
-	.centered {
-		text-align: center;
-	}
-	img.control-button {
-		width: 32;
-		height: 32;
-	}
-	div.baseresult {
-		font-size: 24px;
-		font-family: Verdana, Helvetica;
-	}	
-	div.pantiltresult {
-		font-size: 24px;
-		font-family: Verdana, Helvetica;
-	}	
-	
-</style>
-
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.15.custom.min.js"></script>
-<script type="text/javascript" src="js/shortcut.js"></script>
-<script type="text/javascript">
-
-driving_state = 'stopped';
-
-function send_base_command (cmd)
-{
-	console.log('driving_state is ' + driving_state);	
-//	if (cmd == 's' || cmd == 'x' || cmd == 'L' || cmd == 'R')
-	if (cmd == 's' || cmd == 'x')
+	mysql_connect("localhost", "9thsense", "~FERmion") or die ("We are sorry, we have experienced database error 1043. Please email support@9thsense.com for assistance.");
+	mysql_select_db("9thsense") or die ("We are sorry, we have experienced database error 1151. Please email support@9thsense.com for assistance.");
+	$user = array();
+	$errorClass = '';
+	$showCreateDialog = false;
+	if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'create-account')
 	{
-		window.driving_state = 'stopped';
+		$k = $_REQUEST['key'];
+		$q = "
+				SELECT 
+					* 
+				FROM
+					tz_members
+				WHERE
+					registrationkey = '" . mysql_escape_string($k) . "' 
+			";
+		$res = mysql_query($q);
+		if (mysql_num_rows($res) == 1)
+		{
+			$showCreateDialog = true;	
+			$user = mysql_fetch_assoc($res);
+		} else if (mysql_num_rows($res) > 1) {
+			echo 'Database error - multiple users found. Request not sent. We have notified support automatically.';
+			mail ("alaina@9thsense.com", "Multiple users/keys found", "Key $k");
+			exit;
+		} else {
+			echo 'Database error - no user found. We have notified support automatically. Sorry, but we cannot continue';
+			mail ("alaina@9thsense.com", "No users/keys found: ", "No users/keys found: key $k");
+			exit;
+		}
 	}
-	if (window.driving_state == 'driving' && (cmd != 's' || cmd != 'x'))
+	if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'invite-driver')
 	{
-		//console.log ('driving_state = ' + driving_state + ' and cmd = ' + cmd);
-		console.log ('ignoring');
-		return;
+		$e = $_REQUEST['email'];
+		$r = $_REQUEST['robot'];
+		$q = "
+				SELECT 
+					id 
+				FROM
+					tz_members
+				WHERE
+					usr = '" . mysql_escape_string($r) . "' AND
+					email = '" . mysql_escape_string($e) . "' 
+			";
+		$res = mysql_query($q);
+		if (mysql_num_rows($res) == 1)
+		{
+			echo "$e already has access to drive $r.";
+			exit;
+		} else if (mysql_num_rows($res) > 1) {
+			echo 'Database error - multiple users found. Request not sent. We have notified support automatically.';
+			mail ("alaina@9thsense.com", "Multiple users found: email $e, robot $r", "Multiple users found: email $e, robot $r");
+			exit;
+		} else {
+			$q = "
+				INSERT INTO
+					tz_members
+				(email, usr, registrationkey) 
+				VALUES
+				('" . mysql_escape_string($e) . "',
+				'" . mysql_escape_string($r) . "',
+				'" . md5($e . $r) . "')
+			";
+			//echo $q;
+			$res = mysql_query($q);
+			$headers = 'From: 9th Sense Invitation <support@9thsense.com>' . "\r\n" .
+			'Reply-To: support@9thsense.com';
+			$msg = 
+			 "
+Hi there,
+
+You have been invited to drive a 9th Sense robot.
+
+To register, click the link below, or paste it into a browser:
+
+http://9thsense.com/t/?action=create-account&key=" . md5($e. $r) . "
+
+If you have any problems, please don't hesitate to contact 9th Sense Tech Support at support@9thsense.com.
+
+Thanks!
+The 9th Sense Team
+";
+			$message = Swift_Message::newInstance()
+			
+			  // Give the message a subject
+			  ->setSubject('Your invitation to drive a 9th Sense robot')
+			
+			  // Set the From address with an associative array
+			  ->setFrom(array('support@9thsense.com' => '9th Sense'))
+			
+			  // Set the To addresses with an associative array
+			  ->setTo(array($e => '$e'))
+			
+			  // Give it a body
+			  ->setBody($msg);
+  
+			if ($mailer->send($message))
+			{
+				echo "Invitation sent to $e.";
+			 } else {
+				echo "Failed to send invitation to $e.";
+			 }
+		}
+		exit;
 	}
-//	if (cmd != 's' && cmd != 'x' && cmd != 'L' && cmd != 'R')
-	if (cmd != 's' && cmd != 'x')
+	function check_login ($email, $passwd)
+	// check the username/password combination. $passwd should be md5'd just like it is in the database.
 	{
-		window.driving_state = 'driving';
-	} else {
-		window.driving_state = 'stopped';
+		global $loginStatus, $user;
+		if (isset($_REQUEST['action']) && $_REQUEST['action'] == 'changepw')
+		{
+			$q = "
+				UPDATE
+					tz_members
+				SET
+					pass = '" . mysql_escape_string($passwd) . "',
+					registrationkey = ''
+				WHERE 
+					email = '" . mysql_escape_string($email) . "'
+			";
+			//echo $q;
+			$r = mysql_query($q);
+		}
+		$q = "
+							SELECT
+								* 
+							FROM 
+								tz_members 
+							WHERE
+								email = '" . mysql_escape_string($email) . "' AND
+								pass = '" . mysql_escape_string($passwd) . "'
+								";
+		$r = mysql_query($q);
+		if (mysql_num_rows($r) == 1)
+		{
+			$user = mysql_fetch_assoc($r);
+			setcookie("HeloUsername", $user['email']);
+			setcookie("HeloPassword", $passwd);
+			return true;
+		} else {
+			setcookie("HeloUsername", '');
+			setcookie("HeloPassword", '');
+			$user = array();
+			return false;
+		}			
 	}
-	console.log('driving_state is ' + driving_state);	
-	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&cmd=' + cmd, function(data) {
-	});
-}
-
-function send_pantilt_command (cmd)
-{
-	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&pantilt=' + cmd, function(data) {
-	});
-}
-
-function pantilt_up()
-{
-	send_pantilt_command('u');
-}
-
-function pantilt_down()
-{
-	send_pantilt_command('n');
-}
-
-// function pantilt_left()
-// {
-// 	send_pantilt_command('l');
-// }
-// 
-// function pantilt_right()
-// {
-// 	send_pantilt_command('r');
-// }
-// 
-// function pantilt_center()
-// {
-// 	send_pantilt_command('j');
-// }
-
-
-function base_forward()
-{
-	send_base_command('F');
-}
-
-function base_backward()
-{
-	send_base_command('B');
-}
-
-function base_left()
-{
-	send_base_command('L');
-}
-
-function base_right()
-{
-	send_base_command('R');
-}
-
-function base_stop()
-{
-	send_base_command('x');
-}
-
-function keyboard_clear_shortcuts()
-{
-	shortcut.remove("w");
-	shortcut.remove("a");
-	shortcut.remove("s");
-	shortcut.remove("d");
-	shortcut.remove("x");
-	shortcut.remove("Up");
-	shortcut.remove("Down");
-	shortcut.remove("Right");
-	shortcut.remove("Left");
-	shortcut.remove("Space");
-}
-
-function keyboard_on_keyup()
-{	
-	keyboard_clear_shortcuts();
-	
-	shortcut.add("w",function() {
-		pantilt_up();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("a",function() {
-		pantilt_left();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("s",function() {
-		pantilt_down();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("d",function() {
-		pantilt_right();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("x",function() {
-		pantilt_center();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Up",function() {
-		send_base_command('F');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Down",function() {
-		send_base_command('F');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Right",function() {
-		send_base_command('R');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Left",function() {
-		send_base_command('L');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Space",function() {
-		send_base_command('x');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-}
-function keyboard_on_keydown_stop_on_keyup()
-{	
-	keyboard_clear_shortcuts();
-	
-	// pan/tilt is still done in increments, so currently no need to differentiate between
-	// key down and key up
-	shortcut.add("w",function() {
-		pantilt_up();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("a",function() {
-		pantilt_left();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("s",function() {
-		pantilt_down();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("d",function() {
-		pantilt_right();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("x",function() {
-		pantilt_center();
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	
-	// For driving, key down initiates movement, so tie these to a keydown event
-
-	shortcut.add("t",function() {
-		send_base_command('F');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("g",function() {
-		send_base_command('B');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("h",function() {
-		send_base_command('R');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("f",function() {
-		send_base_command('L');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>9th Sense</title>
+		<link rel="stylesheet" href="css/tc.css" />
+		<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.15.custom.min.js"></script>
+		<script type="text/javascript" src="js/shortcut.js"></script>
+		<script type="text/javascript" src="js/tc.js"></script>
+		<link href="css/ui-darkness/jquery-ui-1.8.19.custom.css" rel="stylesheet" />
+	</head>
+	<body> 
+		<div id="header">
+			<div class="left-side">
+				<div class="header-title"><a target="_blank" href="http://9thsense.com">Helo - Your Personal Avatar</a></div>
+			</div> <!-- .left-side -->
+			<div class="right-side">
+				<?
+					if (isset($_REQUEST['email']) && isset($_REQUEST['password']))
+					{
+						if (check_login($_REQUEST['email'], md5($_REQUEST['password'])))
+						{
+					?>
+							<div class="header-username">Welcome, <?= $_REQUEST['email'] ?></div>
+							<div id="settings-open" class="header-settings">Settings / Invitations</div>
+							<input type="hidden" id="robotAddr" name="robotAddr" value="<?= $user['usr'] ?>" />
+							<div class="header-logout"><a href="?logout">Log out</a></div>
+					<?
+						} else {
+							if (isset($_REQUEST['email']) || isset($_REQUEST['password']))
+							{
+								$errorClass = ' class="error" ';
+							} else {
+								$errorClass = '';
+							}
+							?>
+									<form action="#" method="post">
+										<div class="header-login">
+											<span class="invalid">Invalid login. Please try again.</span>
+											Username: <input type="text" size="20" maxlength="50" name="email" <?= $errorClass ?> />
+											Password: <input type="password" size="15" maxlength="50" name="password" <?= $errorClass ?> />
+											<input type="submit" value="Log in" />
+										</div>
+									</form>
+							<?
+						}						
+					} else { 
+					?>
+							<form action="#" method="post">
+								<div class="header-login">
+									Username: <input type="text" size="20" maxlength="50" name="email"  />
+									Password: <input type="password" size="15" maxlength="50" name="password" />
+									<input type="submit" value="Log in" />
+								</div>
+							</form>
+					<? } ?>
+			</div> <!-- .right-side -->
+		</div><!-- #header -->
+		 <div id="container">
+			<div id="table-wrapper">
+				<div class="commandbox">
+					<div class="commandbox-title">Keyboard commands</div>
+					<div class="control-title">Driving</div>
+					<ul>
+						<li>Go forward - Up arrow, "I"</li>
+						<li>Go backward - Down arrow, "K"</li>
+						<li>Turn left - Left arrow, "J"</li>
+						<li>Turn right - Right arrow, "L"</li>
+						<li>Stop - Space bar, "M"</li>
+					</ul>
+					<div class="control-title">Camera tilt</div>
+					<ul>
+						<li>Tilt up - "W"</li>
+						<li>Tilt down - "S"</li>
+					</ul>
+				</div>
+				<div class="subtable">
+					<div class="control-title">Driving</div>
+					<table id="navigation-table" border="0">
+						<tr>
+							<td class="centered" colspan="3"> <img alt="drive forward" id="button-base-forward" class="control-button unclicked up" src="images/img_trans.gif" /></td>
+						</tr>
+						<tr>
+							<td class="centered"> <img alt="turn left" id="button-base-left" class="control-button unclicked left" src="images/img_trans.gif" /></td>
+							<td class="centered"> <img alt="stop moving" id="button-base-stop" class="control-button unclicked stop" src="images/img_trans.gif" /></td>
+							<td class="centered"> <img alt="turn right" id="button-base-right" class="control-button unclicked right" src="images/img_trans.gif" /></td>
+						</tr>
+						<tr>
+							<td class="centered" colspan="3"> <img alt="drive backward" id="button-base-backward" class="control-button unclicked down" src="images/img_trans.gif" /></td>
+						</tr>
+					</table>
+				</div> <!-- end div .subtable -->
+				<div class="subtable">
+					<div class="control-title">Camera tilt</div>
+					<table id="pantilt-table" border="0">
+						<tr>
+							<td class="centered" colspan="3"> <img alt="tilt up" id="button-pantilt-up" class="control-button unclicked up" src="images/img_trans.gif" /></td>
+						</tr>
+						<tr>
+							<td class="centered" colspan="3"> <img alt="tilt down" id="button-pantilt-down" class="control-button unclicked down" src="images/img_trans.gif" /></td>
+						</tr>
+					</table>
+				</div> <!-- end div .subtable -->
+			</div><!-- end div #table-wrapper -->
+		</div> <!-- end div #container -->
+	<div id="dialog-form" title="Update settings">
+		<form id="password-form" action="/telo-control/index.php?action=changepw" method="post">
+			<h2>Change your password</h2>
+			<label for="new-password">New password</label>
+			<input type="password" name="password" id="new-password" class="text ui-widget-content ui-corner-all" /><br /> <br />
+			<input type="hidden" name="action" value="changepw" />
+			<input type="hidden" name="email" value="<?=$user['email']?>" />
+			<div class="right">
+				<input type="submit" value="Save password" />
+			</div>
+		</form>
+		<hr width="100%" />
+		<form id="invite-form" action="/" method="post">
+			<h2>Invite a new driver</h2>
+			<em>Enter the email of the person you wish to invite and click "Send invitation."</em><br /> <br />
+			<label for="invite-email">Email</label>
+			<input type="text" name="invite-email" id="invite-email" class="text ui-widget-content ui-corner-all" /><br /> <br />
+			<input type="hidden" name="action" value="invite-driver" />
+			<div class="right">
+				<input type="submit" value="Send invitation" />
+			</div>
+			<div id="invitation-result"></div>
+		</form>
+	</div>	 <!-- end div #dialog-form -->
 
 
-	shortcut.add("Up",function() {
-		send_base_command('F');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Down",function() {
-		send_base_command('B');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Right",function() {
-		send_base_command('R');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Left",function() {
-		send_base_command('L');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Space",function() {
-		send_base_command('x');
-	}, { 'type': 'keydown', 'propagate': false, 'disable_in_input': true});
-
-	shortcut.add("t",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("g",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("h",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("f",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	// In this form of driving, releasing the key stops the robot
-	shortcut.add("Up",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Down",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Right",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-	shortcut.add("Left",function() {
-		send_base_command('x');
-	}, { 'type': 'keyup', 'propagate': false, 'disable_in_input': true});
-}
-
-
-	jQuery(document).ready(function() {
-		// initialize with driving on keydown and stopping on keyup
-		keyboard_on_keydown_stop_on_keyup(); 
-
-		$("#qConnect").click(function() {
-			send_base_command('c');
-		});		
-		$("#button-pantilt-right").click(function() {
-			pantilt_right();
-		});		
-		$("#button-pantilt-left").click(function() {
-			pantilt_left();
+	<? 
+		if ($showCreateDialog)
+		{
+	?>
+	<script	type="text/javascript">
+		jQuery(document).ready(function() {
+			$( "#dialog-create" ).dialog({
+				autoOpen: true,
+				height: 390,
+				width: 400,
+				modal: true,
+			   closeOnEscape: false,
+			   open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+			});
 		});
-		$("#button-pantilt-down").click(function() {
-			pantilt_down();
-		});
-		$("#button-pantilt-up").click(function() {
-			pantilt_up();
-		});
-		$("#button-pantilt-center").click(function() {
-			pantilt_center();
-		});
-
-		$("#button-base-right").click(function() {
-			base_right();
-		});
-		$("#button-base-left").click(function() {
-			base_left();
-		});
-		$("#button-base-forward").click(function() {
-			base_forward();
-		});
-		$("#button-base-backward").click(function() {
-			base_backward();
-		});
-		$("#button-base-stop").click(function() {
-			base_stop();
-		});
-	 });
-</script>
-
-<!--<script src="https://apis.google.com/js/client.js?onload=onClientReady"></script>-->
-
-<link href="css/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css"/>
+	</script>
+	<div id="dialog-create" title="Choose a password">
+		<form id="password-form" action="/telo-control/index.php?action=changepw" method="post">
+			<h2>Choose your password</h2>
+			<label for="new-password">New password</label>
+			<input type="password" name="password" id="new-password" class="text ui-widget-content ui-corner-all" /><br /> <br />
+			<input type="hidden" name="action" value="changepw" />
+			<input type="hidden" name="email" value="<?=$user['email']?>" />
+			<div class="right">
+				<input type="submit" value="Save password" />
+			</div>
+		</form>
+	</div>	 <!-- end div #dialog-create -->
+	<? } ?>
 
 
-</head>
-<body> 
- <div id="container">
-	<div id="nav-controls">
-		<div id="table-wrapper">
-			<table style="float:left;" border="0">
-				<tr>
-					<th colspan="3">Navigation</th>
-				</tr>
-				<tr>
-					<td class="centered" colspan="3"> <img alt="drive forward" id="button-base-forward" class="control-button" src="images/forward.png" /></td>
-				</tr>
-				<tr>
-					<td class="centered"> <img alt="turn left" id="button-base-left" class="control-button" src="images/left.png" /></td>
-					<td class="centered"> <img alt="stop moving" id="button-base-stop" class="control-button" src="images/stop.png" /></td>
-					<td class="centered"> <img alt="turn right" id="button-base-right" class="control-button" src="images/right.png" /></td>
-				</tr>
-				<tr>
-					<td class="centered" colspan="3"> <img alt="drive backward" id="button-base-backward" class="control-button" src="images/backward.png" /></td>
-				</tr>
-			</table>
 
-			<table style=" margin-left: 30px; float:left;" border="0">
-				<tr>
-					<th colspan="3">Camera Tilt</th>
-				</tr>
-				<tr>
-					<td class="centered" colspan="3"> <img alt="tilt up" id="button-pantilt-up" class="control-button" src="images/forward.png" /></td>
-				</tr>
-				<!--<tr>
-					<td class="centered"> <img alt="pan left" id="button-pantilt-left" class="control-button" src="images/left.png" /></td>
-					<td class="centered"> <img alt="center" id="button-pantilt-center" class="control-button" src="images/target.jpg" /></td>
-					<td class="centered"> <img alt="pan right" id="button-pantilt-right" class="control-button" src="images/right.png" /></td>
-				</tr>-->
-				<tr>
-					<td class="centered" colspan="3"> <img alt="tilt down" id="button-pantilt-down" class="control-button" src="images/backward.png" /></td>
-				</tr>
-			</table>
-
-		</div>
-		<div class="input">
-			<!--<select id="robotAddr" name="robotAddr">
-				<option value="litebot@9thsense.com">litebot@9thsense.com</option>
-				<option value="droidbot@9thsense.com">droidbot@9thsense.com</option>
-		</div>-->
-		<span id="qConnect">Query connect status</span>
-		<input type="hidden" id="robotAddr" name="robotAddr" value="droidbot@9thsense.com" />
-	</div>
-	<div id="nav-response">
-		<div class="baseresult"><span>Stopped</span></div><br />
-		<!--<div class="pantiltresult">N/A</div><br />-->
-	</div>
-
-</div>
-
-
-</body> 
-</html>
-
-</body>
+	</body> 
 </html>

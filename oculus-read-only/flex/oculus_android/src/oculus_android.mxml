@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"	 
+	creationComplete="init()"  >
+	
+	<mx:Script>
+	<![CDATA[
+	import mx.controls.Alert;
+	import flash.net.NetStream;
+	
+	private var nc:NetConnection;	
+	private var ns1:NetStream;
+	//private var ns2:NetStream;
+	private var video:Video;
+	private var sound:Video;
+	private var connected:Boolean = false;
+	private var rtmpPort:String;
+	
+	private function init():void	{
+		ExternalInterface.addCallback("flashplay", play); // called from Javascript
+		ExternalInterface.addCallback("flashCallServer", callServer); //called from Javascript
+		ExternalInterface.addCallback("connect", connect); //called from Javascript
+		ExternalInterface.addCallback("setRtmpPort", setRtmpPort); //called from Javascript
+		ExternalInterface.call("flashloaded");
+	}	
+	
+	private function setRtmpPort(str:String):void {
+		rtmpPort = str;
+	}
+	
+	private function connect(passcode:String):void {		
+		nc = new NetConnection();
+		var urlarray:Array = ExternalInterface.call("window.location.href.toString").split("/");
+		var a:String = "rtmp://"+ExternalInterface.call("window.location.hostname.toString")+":"+rtmpPort+"/"+urlarray[3]; 
+		//Alert.show(a+" "+passcode);
+	  	nc.connect(a, passcode);
+	  	//nc.connect("rtmp://darkcycles.com/eeedroidRed5");
+	    nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+	    nc.client = this;
+		nc.addEventListener("play",play);
+		nc.addEventListener("message",message);
+		nc.addEventListener("playerfunction",playerfunction);
+		nc.call("playersignin",null); 
+	}
+
+	private function netStatusHandler(e:NetStatusEvent):void  {    
+		var code:String = e.info.code;    
+		if(code == "NetConnection.Connect.Success"){ 
+			connected = true;
+			//play(1);
+			ns1 = new NetStream(nc); // trying this out here, instead of below
+			video = new Video(); // this too
+		}
+		if(code == "NetConnection.Connect.Closed") {
+			message("connection closed","blue", "connection", "closed");
+		}
+	}
+	
+	public function play(nostreams:int):void {
+		if (connected) {
+			//message("play "+nostreams,"blue",null,null); 
+			if (ns1) { ns1.close(); }
+			if (video) { video.clear(); }
+			if (nostreams==0) {
+		 		message("playing 0 streams","blue", null, null);
+			}
+			else {
+				video.attachNetStream(ns1);
+				var aspect:Number = video.width/video.height;
+				//video.width = videoDisplay.width;
+				video.height = videoDisplay.height;
+				video.width = video.height * aspect;
+				video.x = (videoDisplay.width/2) - (video.width/2);
+				videoDisplay.addChild(video);
+				ns1.play("mp4:stream1");
+				message("playing stream","blue", null, null);
+			}
+		}
+		//else { message("not connected","blue",null,null); }
+ 	}
+	
+	private function callServer(fn:String, str:String):void {
+		if (connected) {
+			nc.call("playerCallServer", null, fn, str); 
+		}
+		//Alert.show("playerCallServer "+fn+" "+str);
+	}
+	
+	public function message(str:String, colour:String, status:String, value:String):void {
+		ExternalInterface.call("message",str,colour,status,value);
+	}
+	
+	public function playerfunction(fn:String, params:String):void {
+		ExternalInterface.call(fn,params);
+	}
+	
+	]]>
+	</mx:Script>	
+<mx:VideoDisplay id="videoDisplay" autoPlay="true"   live="true" width="100%" height="100%"/>
+</mx:Application>

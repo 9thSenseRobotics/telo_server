@@ -3,11 +3,11 @@
 // activate full error reporting
 //error_reporting(E_ALL & E_STRICT);
 
-include 'XMPPHP/XMPP.php';
+include 'XMPP.php';
 
 #Use XMPPHP_Log::LEVEL_VERBOSE to get more logging for error reports
 #If this doesn't work, are you running 64-bit PHP with < 5.2.6?
-$conn = new XMPPHP_XMPP('talk.google.com', 5222, 'username', 'password', 'xmpphp', 'gmail.com', $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
+$conn = new XMPPHP_XMPP('9thsense.com', 5222, 'controller', '9thsense', 'xmpphp', '9thsense.com', $printlog=true, $loglevel=XMPPHP_Log::LEVEL_INFO);
 $conn->autoSubscribe();
 
 $vcard_request = array();
