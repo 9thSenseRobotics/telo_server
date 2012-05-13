@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/542/trunk/oculus/WEB-INF/src/developer
+END
+EmailAlerts.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/542/trunk/oculus/WEB-INF/src/developer/EmailAlerts.java
+END
+OpenNIRead.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/520/trunk/oculus/WEB-INF/src/developer/OpenNIRead.java
+END
+CommandServer.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/540/trunk/oculus/WEB-INF/src/developer/CommandServer.java
+END
+DockingObserver.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/421/trunk/oculus/WEB-INF/src/developer/DockingObserver.java
+END
+FTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/541/trunk/oculus/WEB-INF/src/developer/FTP.java
+END
+UpdateFTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/541/trunk/oculus/WEB-INF/src/developer/UpdateFTP.java
+END
+LogManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/371/trunk/oculus/WEB-INF/src/developer/LogManager.java
+END
+SendMail.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/520/trunk/oculus/WEB-INF/src/developer/SendMail.java
+END

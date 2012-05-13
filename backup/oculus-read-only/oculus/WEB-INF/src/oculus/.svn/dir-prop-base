@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 86
+Command.java
+CommandGUI.java
+CommandManager.java
+MulticastChannel.java
+XMLParser.java
+
+END

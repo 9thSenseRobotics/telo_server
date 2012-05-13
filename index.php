@@ -167,7 +167,10 @@ The 9th Sense Team
 	<body> 
 		<div id="header">
 			<div class="left-side">
-				<div class="header-title"><a target="_blank" href="http://9thsense.com">Helo - Your Personal Avatar</a></div>
+				<div class="header-title">
+					<a target="_blank" href="http://9thsense.com"><img class="9thsense-logo" height="15" src="http://9thsense.com/uploads/2012/01/logo_new.png" /></a>
+				 	<a target="_blank" href="http://9thsense.com">Helo - Your Personal Avatar</a>
+				 </div>
 			</div> <!-- .left-side -->
 			<div class="right-side">
 				<?
@@ -176,8 +179,11 @@ The 9th Sense Team
 						if (check_login($_REQUEST['email'], md5($_REQUEST['password'])))
 						{
 					?>
-							<div class="header-username">Welcome, <?= $_REQUEST['email'] ?></div>
-							<div id="settings-open" class="header-settings">Settings / Invitations</div>
+							<div class="header-username">
+							Welcome, <?= $user['email'] ?>
+							
+							</div>
+							<div id="settings-open" class="header-settings"><a href="#">Settings / Invitations</a></div>
 							<input type="hidden" id="robotAddr" name="robotAddr" value="<?= $user['usr'] ?>" />
 							<div class="header-logout"><a href="?logout">Log out</a></div>
 					<?
@@ -256,10 +262,21 @@ The 9th Sense Team
 						</tr>
 					</table>
 				</div> <!-- end div .subtable -->
+				<div class="subtable">
+					<div class="control-title">Command status</div>
+					<table id="pantilt-table" border="0">
+						<tr>
+							<td class="left-align">Command latency: <span id="latency">0</span> seconds</td>
+						</tr>
+						<tr>
+							<td class="left-align">Last status: <span id="status">ok</span></td>
+						</tr>
+					</table>
+				</div> <!-- end div .subtable -->
 			</div><!-- end div #table-wrapper -->
 		</div> <!-- end div #container -->
 	<div id="dialog-form" title="Update settings">
-		<form id="password-form" action="/telo-control/index.php?action=changepw" method="post">
+		<form id="password-form" action="/tc2/index.php?action=changepw" method="post">
 			<h2>Change your password</h2>
 			<label for="new-password">New password</label>
 			<input type="password" name="password" id="new-password" class="text ui-widget-content ui-corner-all" /><br /> <br />
@@ -301,7 +318,7 @@ The 9th Sense Team
 		});
 	</script>
 	<div id="dialog-create" title="Choose a password">
-		<form id="password-form" action="/telo-control/index.php?action=changepw" method="post">
+		<form id="password-form" action="/tc2/index.php?action=changepw" method="post">
 			<h2>Choose your password</h2>
 			<label for="new-password">New password</label>
 			<input type="password" name="password" id="new-password" class="text ui-widget-content ui-corner-all" /><br /> <br />

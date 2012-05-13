@@ -66,7 +66,11 @@ function send_base_command (cmd)
 	}
 	console.log('driving_state is ' + driving_state);	
 	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&cmd=' + cmd, function(data) {
+		jQuery('#latency').html(data.latency);
+		jQuery('#status').html(data.status);
 	});
+// 	$.get('telorun.php?phoneid=758fa234cb7edb05&payload=' + cmd, function(data) {
+// 	});
 }
 
 function send_pantilt_command (cmd)
@@ -109,7 +113,12 @@ function send_pantilt_command (cmd)
 	}
 	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&pantilt=' + cmd, function(data) {
 		unclick_buttons();
+		jQuery('#latency').html(data.latency);
+		jQuery('#status').html(data.status);
 	});
+// 	$.get('telorun.php?phoneid=758fa234cb7edb05&payload=' + cmd, function(data) {
+// 	});
+	
 }
 
 function pantilt_up()
@@ -320,6 +329,14 @@ function keyboard_on_keydown_stop_on_keyup()
 
 
 	jQuery(document).ready(function() {
+	
+		// add hover styles
+		$('.header-settings').hover(function() {
+			$(this).addClass('hover-background');
+		}, function () {
+			$(this).removeClass('hover-background');
+		});
+		
 		$( "#dialog-form" ).dialog({
 			autoOpen: false,
 			height: 390,

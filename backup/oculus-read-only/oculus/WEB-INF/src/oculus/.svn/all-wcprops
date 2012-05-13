@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/542/trunk/oculus/WEB-INF/src/oculus
+END
+RtmpPortRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/520/trunk/oculus/WEB-INF/src/oculus/RtmpPortRequest.java
+END
+Settings.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/542/trunk/oculus/WEB-INF/src/oculus/Settings.java
+END
+Application.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/540/trunk/oculus/WEB-INF/src/oculus/Application.java
+END
+Updater.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/458/trunk/oculus/WEB-INF/src/oculus/Updater.java
+END
+SystemWatchdog.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/520/trunk/oculus/WEB-INF/src/oculus/SystemWatchdog.java
+END
+OptionalSettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/541/trunk/oculus/WEB-INF/src/oculus/OptionalSettings.java
+END
+Speech.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/src/oculus/Speech.java
+END
+Docker.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/305/trunk/oculus/WEB-INF/src/oculus/Docker.java
+END
+AutoDock.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/520/trunk/oculus/WEB-INF/src/oculus/AutoDock.java
+END
+CurlUpload.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/537/trunk/oculus/WEB-INF/src/oculus/CurlUpload.java
+END
+BatteryLife.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/542/trunk/oculus/WEB-INF/src/oculus/BatteryLife.java
+END
+Util.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/541/trunk/oculus/WEB-INF/src/oculus/Util.java
+END
+PlayerCommands.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/516/trunk/oculus/WEB-INF/src/oculus/PlayerCommands.java
+END
+State.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/!svn/ver/540/trunk/oculus/WEB-INF/src/oculus/State.java
+END
+FrameGrabHTTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/510/trunk/oculus/WEB-INF/src/oculus/FrameGrabHTTP.java
+END
+Observer.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/355/trunk/oculus/WEB-INF/src/oculus/Observer.java
+END
+FactorySettings.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/527/trunk/oculus/WEB-INF/src/oculus/FactorySettings.java
+END
+LoginRecords.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/540/trunk/oculus/WEB-INF/src/oculus/LoginRecords.java
+END
+AuthGrab.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/520/trunk/oculus/WEB-INF/src/oculus/AuthGrab.java
+END
+Downloader.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/!svn/ver/458/trunk/oculus/WEB-INF/src/oculus/Downloader.java
+END

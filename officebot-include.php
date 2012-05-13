@@ -1,8 +1,7 @@
 <?php
-$mysql_host = '216.220.40.210';
-$mysql_user = 'officebot';
-#$mysql_pass = 's<jnew4$(rkjjkgMvRPl';
-$mysql_pass = 'hello';
+
+mysql_connect("localhost", "9thsense", "~FERmion") or die ("We are sorry, we have experienced database error 1043. Please email support@9thsense.com for assistance.");
+mysql_select_db("9thsense") or die ("We are sorry, we have experienced database error 1151. Please email support@9thsense.com for assistance.");
 
 $robotname = "robot@9thsense.com";
 

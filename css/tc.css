@@ -3,16 +3,19 @@ html {
 }
 
 #header {
-	font-family: Verdana, Helvetica;
-	font-size: 10px;
-	font-weight: bold;
-	color: #999999;
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 14px;
+	color: #666;
+	height: 25px;
 	margin-left: 20px;
 	margin-right: 20px;
 	padding-top: 10px;
 	padding-bottom: 20px;
 	margin-bottom: 10px;
 	border-bottom: 1px solid #999999;
+}
+
+.hover-background {
 }
 
 .left-side {
@@ -25,27 +28,30 @@ html {
 	float: right;
 }
 
+.right-side div {
+	height: 25px;
+}
+
 div.header-title {
 	float: left;
 }
 
 div.header-title a {
-	color: #999999;
+	color: #666;
 	text-decoration: none;
-	font-weight: bold;
 }
 
 div.header-username {
 	float: left;
-	margin-right: 10px;
-	padding-right: 8px;
+	margin-right: 15px;
+	padding-right: 15px;
 	border-right: 1px solid #999999;
 }
 
 form label {
 	font-size: 14px;
 	font-weight: bold;
-	font-family: Verdana,Helvetica;
+	font-family: 'Droid Sans', arial, serif;
 	margin-right: 20px;
 }
 
@@ -62,6 +68,10 @@ div.right {
 	text-align: right;
 }
 
+.left-align {
+	text-align: left;
+}
+
 div.right input {
 }
 
@@ -69,17 +79,30 @@ div.right input {
 	display: none;
 }
 
-div.header-settings {
-	float: left;
-	margin-right: 10px;
-	padding-right: 8px;
-	border-right: 1px solid #999999;
+.header-title a {
+	margin-left: 30px;
 }
 
+img.9thsense-logo {
+	height: 15px;
+}
+
+div.header-settings {
+	float: left;
+	margin-right: 15px;
+	padding-right: 15px;
+	border-right: 1px solid #999999;
+	cursor: pointer;
+}
+
+div.header-settings a {
+	text-decoration: none;
+	color: #666;
+}
 
 div.header-login {
 	float: left;
-	margin-right: 10px;
+	margin-right: 15px;
 	padding: 5px;
 	padding-right: 8px;
 	margin-top: -10px;
@@ -99,9 +122,8 @@ span.invalid {
 }
 
 div.header-username a {
-	color: #999999;
+	color: #666;
 	text-decoration: none;
-	font-weight: bold;
 }
 
 div.header-logout {
@@ -109,9 +131,8 @@ div.header-logout {
 }
 
 div.header-logout a {
-	color: #999999;
+	color: #666;
 	text-decoration: none;
-	font-weight: bold;
 }
 
 div#container {
@@ -149,11 +170,11 @@ p.nav-title {
 
 div.baseresult {
 	font-size: 24px;
-	font-family: Verdana, Helvetica;
+	font-family: 'Droid Sans', arial, serif;
 }	
 div.pantiltresult {
 	font-size: 24px;
-	font-family: Verdana, Helvetica;
+	font-family: 'Droid Sans', arial, serif;
 }	
 
 .table-wrapper {
@@ -188,6 +209,7 @@ div.pantiltresult {
 	margin-top: -10px;
 	margin-left: -11px;
 	color: #eeeeee;
+	font-family: 'Droid Sans', arial, serif;
 	-moz-border-radius: 8px 8px 0px 0px;
 	border-radius: 8px 8px 0px 0px;
 	background-color: #444444;
@@ -197,7 +219,7 @@ div.pantiltresult {
 }
 
 .commandbox ul li {
-	font-family: Verdana, Helvetica;
+	font-family: 'Droid Sans', arial, serif;
 	font-size: 12px;
 	color: #999999;
 }
@@ -207,7 +229,7 @@ div.pantiltresult {
 }
 
 .control-title {
-	font-family: Verdana, Helvetica;
+	font-family: 'Droid Sans', arial, serif;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 22px;

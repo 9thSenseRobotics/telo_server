@@ -176,6 +176,28 @@ class messageToRobot extends robotMessages
 		$this->XML->addChild('a', $this->commandArguments);
 		$this->XML->addchild('co', $this->comment);
 	}
+	function __construct7($driverAddr, $driverName, $robotAddr, $commandChar, $commandArguments, $comment, $timeStamp)
+	// 7-argument constructor: build this class from its component data with a command and a comment, plus timestamp
+	{
+		// set the class' properties from the passed-in values
+		$this->driverAddr = $driverAddr;
+		$this->driverName = $driverName;
+		$this->robotAddr = $robotAddr;
+		$this->commandChar = $commandChar;
+		$this->commandArguments = $commandArguments;
+		$this->comment = $comment;
+		$this->timeStamp = $timeStamp;
+		
+		// now build the $this->XML property from what you've already set
+		$this->XML = new SimpleXMLElement("<m></m>");
+		$this->XML->addChild('t', $this->timeStamp);
+		$this->XML->addChild('d', $this->driverAddr);
+		$this->XML->addChild('dn', $this->driverName);
+		$this->XML->addChild('r', $this->robotAddr);
+		$this->XML->addChild('c', $this->commandChar);
+		$this->XML->addChild('a', $this->commandArguments);
+		$this->XML->addchild('co', $this->comment);
+	}
 }
 
 class messageFromRobot extends robotMessages
@@ -296,5 +318,5 @@ function robotMessagesTestSuite ()
 	print_r($messageToRobot);
 }
 
-robotMessagesTestSuite();
+//robotMessagesTestSuite();
 ?>
