@@ -1,3 +1,0 @@
-$createActionTable = 'create_action';
-$pantiltActionTable = 'pantilt_action';
-$createStatusTable = 'create_status';
