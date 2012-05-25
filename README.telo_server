@@ -1,0 +1,7 @@
+You'll need to install a few packages:
+
+sudo apt-get install php5 php5-cli php5-mysql php5-common
+
+...and to run it, just cd to that directory and run:
+
+php xmpp-talk-daemon.php &

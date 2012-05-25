@@ -1,0 +1,369 @@
+<Module>
+<!--
+Licensed under the Apache License, Version 2.0 (the "License"); you may not * use this file except in compliance with the License. You may obtain a copy of * the License at * * http://www.apache.org/licenses/LICENSE-2.0 *	 * Unless required by applicable law or agreed to in writing, software * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the * License for the specific language governing permissions and limitations under * the License
+-->
+<ModulePrefs title="Hangout Starter">
+<Require feature="rpc"/>
+<Require feature="views"/>
+<Require feature="locked-domain"/>
+</ModulePrefs>
+<Content type="html">
+<![CDATA[
+<html>
+<head>
+
+<title>9th Sense</title>
+<style type="text/css">
+	div#container {
+		width: 100%;
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+	div#nav-reports {
+		width: 25%;
+		float: left;
+		margin: 15px;
+		padding: 10px;
+	}
+	div#nav-controls {
+		width: 25%;
+		float: left;
+		margin: auto;
+		padding: 10px;
+		text-align: center;
+	}
+	div#pri-video {
+		width: 25%;
+		float: left;
+		margin: 15px;
+		padding: 10px;
+	}
+	p.nav-title {
+		font-size: 32px;
+		color: #bbbbbb;
+	}	
+	.centered {
+		text-align: center;
+	}
+	img.control-button {
+		width: 32;
+		height: 32;
+	}
+	div.baseresult {
+		font-size: 24px;
+		font-family: Verdana, Helvetica;
+	}	
+	div.pantiltresult {
+		font-size: 24px;
+		font-family: Verdana, Helvetica;
+	}	
+	
+</style>
+<script src="https://hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=1.0" ></script>
+<script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.15.custom.min.js"></script>
+<!--
+<script src="http://hangoutsapi.talkgadget.google.com/talkgadget/apps/gadgets/js/rpc.js"></script>
+<script src="http://hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=0.2"></script>
+-->
+<script type="text/javascript">
+
+function send_base_command (cmd)
+{
+	$.post('http://9thsense.com/telo-controller/officebot-controller.php?cmd=' + cmd, function(data) {
+		switch(cmd)
+		{
+			case 'o': // forward
+				showCmd = 'Driving forward';
+				break;
+			case 'l': // backward
+				showCmd = 'Driving backward';
+				break;
+			case 'a': // left
+				showCmd = 'Turn left';
+				break;
+			case 'd': // right
+				showCmd = 'Turn right';
+				break;
+			case 's': // stop
+				showCmd = 'Stopped';
+				break;
+		}
+		$('div.baseresult span').html(showCmd);
+	});
+}
+
+function send_pantilt_command (cmd)
+{
+	$.post('http://9thsense.com/telo-control/officebot-controller.php?pantilt=' + cmd, function(data) {
+	});
+}
+
+function pantilt_up()
+{
+	send_pantilt_command('u');
+}
+
+function pantilt_down()
+{
+	send_pantilt_command('d');
+}
+
+function pantilt_left()
+{
+	send_pantilt_command('l');
+}
+
+function pantilt_right()
+{
+	send_pantilt_command('r');
+}
+
+function pantilt_center()
+{
+	send_pantilt_command('j');
+}
+
+
+function base_forward()
+{
+	send_base_command('o');
+}
+
+function base_backward()
+{
+	send_base_command('l');
+}
+
+function base_left()
+{
+	send_base_command('a');
+}
+
+function base_right()
+{
+	send_base_command('d');
+}
+
+function base_stop()
+{
+	send_base_command('s');
+}
+
+
+	$(document).ready(function() {
+		action = null;
+// 		$("#button-base-forward").mousedown(function() {
+// 			console.log('forward');
+// 			action = setInterval(base_forward, 1000);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 			base_stop();
+// 		});
+// 		$("#button-base-backward").mousedown(function() {
+// 			console.log('backward');
+// 			action = setInterval(base_backward, 1000);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 			base_stop();
+// 		});
+// 		$("#button-base-left").mousedown(function() {
+// 			console.log('left');
+// 			action = setInterval(base_left, 1000);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 			base_stop();
+// 		});
+// 		$("#button-base-right").mousedown(function() {
+// 			console.log('right');
+// 			action = setInterval(base_right, 1000);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 			base_stop();
+// 		});
+
+// 		$("#button-pantilt-up").mousedown(function() {
+// 			console.log('pantilt-up');
+// 			action = setInterval(pantilt_up, 300);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 		});
+// 		
+// 		$("#button-pantilt-down").mousedown(function() {
+// 			console.log('pantilt-down');
+// 			action = setInterval(pantilt_down, 300);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 		});
+// 
+// 		$("#button-pantilt-left").mousedown(function() {
+// 			console.log('pantilt-left');
+// 			action = setInterval(pantilt_left, 300);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 		});
+
+		$("#button-pantilt-right").click(function() {
+			pantilt_right();
+		});
+		$("#button-pantilt-left").click(function() {
+			pantilt_left();
+		});
+		$("#button-pantilt-down").click(function() {
+			pantilt_down();
+		});
+		$("#button-pantilt-up").click(function() {
+			pantilt_up();
+		});
+		$("#button-pantilt-center").click(function() {
+			pantilt_center();
+		});
+
+		$("#button-base-right").click(function() {
+			base_right();
+		});
+		$("#button-base-left").click(function() {
+			base_left();
+		});
+		$("#button-base-forward").click(function() {
+			base_forward();
+		});
+		$("#button-base-backward").click(function() {
+			base_backward();
+		});
+		$("#button-base-stop").click(function() {
+			base_stop();
+		});
+
+// 		$("#button-pantilt-right").mousedown(function() {
+// 			console.log('pantilt-right');
+// 			action = setInterval(pantilt_right, 300);
+// 		}).bind('mouseup mouseleave', function () {
+// 			clearInterval(action);
+// 		});
+				
+
+		$("#button-base-stop").mousedown(function() {
+			console.log('stop');
+			base_stop();
+		});
+// 		setInterval(function () {
+// 			d = new Date();		
+// //			$("#navcam-image").attr("src", "http://199.101.129.90:8991/?action=snapshot&d=" + d.getTime());
+// //			$("#navcam-image").attr("src", "8992.jpg&d=" + d.getTime());
+// 		},200);
+// 		setInterval(function () {
+// 			d = new Date();		
+// //			$("#pricam-image").attr("src", "http://199.101.129.90:8992/?action=snapshot&d=" + d.getTime());
+// //			$("#navcam-image").attr("src", "8992.jpg&d=" + d.getTime());
+// 		},200);
+	 });
+</script>
+<script>
+
+var apiStatusDiv = document.getElementById("apiStatus");
+var participantsDiv = document.getElementById("participants");
+
+console.log("Setup stuff.")
+
+function updateParticipants() {
+        try {
+                var retVal = "<ul>";
+                
+                var participants = gapi.hangout.getParticipants();
+                
+                for ( var index in participants ) {
+                    var part = participants[index];
+                    
+                    retVal += "<li>" + part.person.displayName + "</li>";
+                }
+        
+                retVal += "</ul>"
+                        
+                participantsDiv.innerHTML = retVal;
+        }
+        catch (e) {
+                console.log( e );
+        }
+}
+
+function init() {
+        apiStatusDiv.innerHTML = "Init";
+        
+        gapi.hangout.av.onVolumesChanged.add(function(eventObj) {
+            updateParticipants();
+        });
+        
+        updateParticipants();
+}
+
+/** Called when jsclient has fully loaded; sets API key */
+function onClientReady() {
+    init();
+}
+</script>
+
+<link href="css/ui-lightness/jquery-ui-1.8.15.custom.css" rel="stylesheet" type="text/css"/>
+
+
+</head>
+<body> 
+ <div id="container">
+	<div id="nav-controls">
+		<div id="table-wrapper">
+			<div style="float: left;">
+				<table border="0">
+					<tr>
+						<th colspan="3">Navigation</th>
+					</tr>
+					<tr>
+						<td class="centered" colspan="3"> <img alt="drive forward" id="button-base-forward" class="control-button" src="http://9thsense.com/telo-control/images/forward.png" /></td>
+					</tr>
+					<tr>
+						<td class="centered"> <img alt="turn left" id="button-base-left" class="control-button" src="http://9thsense.com/telo-control/images/left.png" /></td>
+						<td class="centered"> <img alt="stop moving" id="button-base-stop" class="control-button" src="http://9thsense.com/telo-control/images/stop.png" /></td>
+						<td class="centered"> <img alt="turn right" id="button-base-right" class="control-button" src="http://9thsense.com/telo-control/images/right.png" /></td>
+					</tr>
+					<tr>
+						<td class="centered" colspan="3"> <img alt="drive backward" id="button-base-backward" class="control-button" src="http://9thsense.com/telo-control/images/backward.png" /></td>
+					</tr>
+				</table>
+			</div>
+			<div style="float: left;">
+
+				<table border="0">
+					<tr>
+						<th colspan="3">Camera tilt</th>
+					</tr>
+					<tr>
+						<td class="centered" colspan="3"> <img alt="tilt up" id="button-pantilt-up" class="control-button" src="http://9thsense.com/telo-control/images/forward.png" /></td>
+					</tr>
+	<!-- 
+					<tr>
+						<td class="centered"> <img alt="pan left" id="button-pantilt-left" class="control-button" src="http://9thsense.com/telo-control/images/left.png" /></td>
+						<td class="centered"> <img alt="center" id="button-pantilt-center" class="control-button" src="http://9thsense.com/telo-control/images/target.jpg" /></td>
+						<td class="centered"> <img alt="pan right" id="button-pantilt-right" class="control-button" src="http://9thsense.com/telo-control/images/right.png" /></td>
+					</tr>
+	 -->
+					<tr>
+						<td class="centered" colspan="3"> <img alt="tilt down" id="button-pantilt-down" class="control-button" src="http://9thsense.com/telo-control/images/backward.png" /></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	<div id="nav-response">
+		<!--<div class="baseresult"><span>Stopped</span></div><br />-->
+		<!--<div class="pantiltresult">N/A</div><br />-->
+	</div>
+
+</div>
+
+
+</body> 
+</html>
+
+]]>
+</Content>
+</Module>

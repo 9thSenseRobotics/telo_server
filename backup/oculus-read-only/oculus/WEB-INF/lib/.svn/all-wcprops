@@ -1,0 +1,89 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/500/trunk/oculus/WEB-INF/lib
+END
+en_us.jar
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/en_us.jar
+END
+servlet-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/256/trunk/oculus/WEB-INF/lib/servlet-api.jar
+END
+cmu_time_awb.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/cmu_time_awb.jar
+END
+cmudict04.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/cmudict04.jar
+END
+jasypt-1.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/18/trunk/oculus/WEB-INF/lib/jasypt-1.6.jar
+END
+freetts.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/freetts.jar
+END
+cmutimelex.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/cmutimelex.jar
+END
+cmulex.jar
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/cmulex.jar
+END
+jacob.jar
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/18/trunk/oculus/WEB-INF/lib/jacob.jar
+END
+org.OpenNI.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/500/trunk/oculus/WEB-INF/lib/org.OpenNI.jar
+END
+freetts-jsapi10.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/freetts-jsapi10.jar
+END
+RXTXcomm.jar
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/!svn/ver/18/trunk/oculus/WEB-INF/lib/RXTXcomm.jar
+END
+cmu_us_kal.jar
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/!svn/ver/318/trunk/oculus/WEB-INF/lib/cmu_us_kal.jar
+END
+mail.jar
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/117/trunk/oculus/WEB-INF/lib/mail.jar
+END

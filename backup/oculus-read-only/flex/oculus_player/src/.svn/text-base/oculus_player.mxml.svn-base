@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 	 
+	creationComplete="init()" width="640" height="480">
+	
+	<mx:Script>
+	<![CDATA[
+	import mx.controls.Alert;
+	import flash.net.NetStream;
+	import flash.media.Microphone;
+		
+	private var nc:NetConnection;	
+	private var ns1:NetStream;
+	private var ns2:NetStream;
+	private var video:Video;
+	private var connected:Boolean = false;
+	private var camera:Camera = Camera.getCamera(); //new
+	private var mic:Microphone =  Microphone.getMicrophone(); //new
+	//private var mic:Microphone =  Microphone.getEnhancedMicrophone(); //new
+	private var video2:Video;
+	public static const MSGCOLOUR:String = "#8C21B8";
+	private var rtmpPort:String;
+	
+	private function init():void	{
+		//connect();
+		ExternalInterface.addCallback("flashplay", play); // called from Javascript
+		ExternalInterface.addCallback("flashCallServer", callServer); //called from Javascript
+		ExternalInterface.addCallback("connect", connect); 
+		ExternalInterface.addCallback("setRtmpPort", setRtmpPort); //called from Javascript
+		ExternalInterface.call("flashloaded");
+		ExternalInterface.addCallback("mutePlayerMic", mutePlayerMic);
+		ExternalInterface.addCallback("unmutePlayerMic", unmutePlayerMic);
+		// ExternalInterface.addCallback("playlocal", playlocal); // delete
+    // if (mic) { mic.rate = 8; mic.setSilenceLevel(0,0); }
+    if (mic) { 
+    	// mic.rate = 8;
+    	//mic.setSilenceLevel(0,0);
+		
+    	mic.codec = SoundCodec.SPEEX; // had to put last because nothing after this compiles???? wtf ?
+    	mic.encodeQuality = 4;
+		
+		mic.setUseEchoSuppression(true);
+		
+//		var options:MicrophoneEnhancedOptions = new MicrophoneEnhancedOptions();
+//		options.echoPath = 128;
+//		options.mode = MicrophoneEnhancedMode.FULL_DUPLEX;
+//		options.nonLinearProcessing = true;
+//		mic.enhancedOptions = options;
+		
+//		mic.setSilenceLevel(0);
+//		mic.rate = 16;
+		}
+	}	
+	
+	private function setRtmpPort(str:String):void {
+		rtmpPort = str;
+	}
+	
+	private function connect(passcode:String):void {		
+		//Alert.show(user + " " + pass);
+		nc = new NetConnection();
+		var urlarray:Array = ExternalInterface.call("window.location.href.toString").split("/");
+		//var a:String = "rtmp://"+ExternalInterface.call("window.location.hostname.toString")+"/"+urlarray[3]; 
+		var a:String = "rtmp://"+ExternalInterface.call("window.location.hostname.toString")+":"+rtmpPort+"/"+urlarray[3]; 
+
+	  	nc.connect(a, passcode);
+	    nc.addEventListener(NetStatusEvent.NET_STATUS, netStatusHandler);
+	    nc.client = this;
+		nc.addEventListener("play",play);
+		nc.addEventListener("message",message);
+		nc.addEventListener("playerfunction",playerfunction);
+		nc.addEventListener("publish",publish); // new
+//		nc.addEventListener("muteROVMic", mutePlayerMic);
+//		nc.addEventListener("unmuteROVMic", unmutePlayerMic);
+		nc.call("playersignin",null); // try putting this one down
+	
+	}
+
+	private function netStatusHandler(e:NetStatusEvent):void  {    
+		var code:String = e.info.code;    
+		if(code == "NetConnection.Connect.Success"){ 
+			connected = true;
+			ns1 = new NetStream(nc); 
+			video = new Video(); 
+		}
+		if(code == "NetConnection.Connect.Closed") {
+			message("connection closed",MSGCOLOUR, "connection", "closed");
+		}
+	}
+	
+	public function play(nostreams:int, scale:int):void {
+		if (connected) {
+		  if (ns1) { ns1.close(); }
+		  if (video) { video.clear(); }
+			if (nostreams==0) {
+    	  message("stream stopped",MSGCOLOUR, null, null);
+			}
+			else {
+				video.attachNetStream(ns1);
+				video.width = 640 * scale / 100;
+				video.x = (640-video.width)/2;
+				video.height = 480 * scale / 100;
+				video.y = (480-video.height)/2;
+				videoDisplay.addChild(video);
+				ns1.play("mp4:stream1");
+				message("playing stream",MSGCOLOUR, null, null);
+			}
+		}
+	}
+	
+	private function callServer(fn:String, str:String):void {
+		if (connected) {
+			nc.call("playerCallServer", null, fn, str); 
+		}
+		//Alert.show("playerCallServer "+fn+" "+str);
+	}
+	
+	public function message(str:String, colour:String, status:String, value:String):void {
+		ExternalInterface.call("message",str,colour,status,value);
+	}
+	
+	public function playerfunction(fn:String, params:String):void {
+		ExternalInterface.call(fn,params);
+	}
+	
+	public function publish(mode:String,width:int, height:int, fps:int, quality:int):void {
+		
+		try {
+		  if (ns2) { 
+		  	ns2.attachCamera(null); 
+		  	ns2.attachAudio(null); 
+		  	ns2.close();
+		  }
+			if (video2) { video2.clear(); video2.attachCamera(null); }
+ 			videoDisplayMini.visible = false; 
+		  if (mode != "stop") {
+		  	camera.setMode(width,height,fps);
+				camera.setQuality(0,quality);
+	 			ns2 = new NetStream(nc);  
+		    if (mode == "camera" || mode == "camandmic") { 
+		    	ns2.attachCamera(camera);
+	 				video2 = new Video();
+					video2.attachCamera(camera);
+					video2.width = 100;
+					video2.height = 87;
+					videoDisplayMini.visible = true;
+					videoDisplayMini.addChild(video2);
+	    	}
+				if (mode == "mic" || mode == "camandmic") { } // ns2.attachAudio(mic); } disable, push-to-talk default
+				ns2.publish("mp4:stream2", 'live');	    	
+				message("streaming local",MSGCOLOUR, "selfstream", mode);
+			}
+			else {  message("local stream stopped",MSGCOLOUR, "selfstream", mode); }
+		}
+		catch(err:Error) { Alert.show( err.toString() ); }
+	}
+		
+	public function mutePlayerMic():void {
+		if (mic && ns2) {
+			ns2.attachAudio(null); 
+		}
+	}
+	
+	public function unmutePlayerMic():void {
+		if (mic && ns2) {
+			ns2.attachAudio(mic);
+		}
+	}
+
+	
+	]]>
+	</mx:Script>	
+<mx:VideoDisplay id="videoDisplay" x="0" y="0" autoPlay="true" width="640" height="480"  live="true" />
+<mx:VideoDisplay x="10" y="383" width="100" height="87" id="videoDisplayMini" autoPlay="true" live="true" visible="false"/>
+	
+</mx:Application>
+

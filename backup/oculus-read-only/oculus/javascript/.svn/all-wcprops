@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/!svn/ver/510/trunk/oculus/javascript
+END
+server.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/456/trunk/oculus/javascript/server.js
+END
+client_android.js
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/!svn/ver/425/trunk/oculus/javascript/client_android.js
+END
+client.js
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/510/trunk/oculus/javascript/client.js
+END
+client_touch.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/24/trunk/oculus/javascript/client_touch.js
+END

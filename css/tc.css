@@ -1,0 +1,320 @@
+html {
+	overflow: hidden;
+}
+
+#header {
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 14px;
+	color: #666;
+	height: 25px;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #999999;
+}
+
+.hover-background {
+}
+
+.left-side {
+	padding-bottom: 10px;
+	float: left;
+}
+
+.right-side {
+	padding-bottom: 10px;
+	float: right;
+}
+
+.right-side div {
+	height: 25px;
+}
+
+div.header-title {
+	float: left;
+}
+
+div.header-title a {
+	color: #666;
+	text-decoration: none;
+}
+
+div.header-username {
+	float: left;
+	margin-right: 15px;
+	padding-right: 15px;
+	border-right: 1px solid #999999;
+}
+
+form label {
+	font-size: 14px;
+	font-weight: bold;
+	font-family: 'Droid Sans', arial, serif;
+	margin-right: 20px;
+}
+
+form em {
+	font-size: 12px;
+}
+
+form h2 {
+	font-size: 16px;
+}
+
+div.right {
+	width: 100%;
+	text-align: right;
+}
+
+.left-align {
+	text-align: left;
+}
+
+.float-left {
+	float: left;
+}
+
+.slider-labels {
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 12px;
+	color: #999999;
+	margin-top: 6px;
+}
+#message-table {
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 12px;
+	color: #999999;
+	margin-top: 6px;
+}
+
+.float-right {
+	float: right;
+}
+
+.clear-link {
+	font-size: 10px;
+	font-family: 'Droid Sans', arial, serif;
+}
+
+#message {
+	color: #ff0000;
+}
+
+.message-row {
+	display: none;
+}
+
+div.right input {
+}
+
+.no-close .ui-dialog-titlebar-close {
+	display: none;
+}
+
+.header-title a {
+	margin-left: 30px;
+}
+
+img.9thsense-logo {
+	height: 15px;
+}
+
+div.header-settings {
+	float: left;
+	margin-right: 15px;
+	padding-right: 15px;
+	border-right: 1px solid #999999;
+	cursor: pointer;
+}
+
+div.header-settings a {
+	text-decoration: none;
+	color: #666;
+}
+
+div.header-login {
+	float: left;
+	margin-right: 15px;
+	padding: 5px;
+	padding-right: 8px;
+	margin-top: -10px;
+}
+
+div.header-login input {
+	background-color: #eeeeee;
+}
+
+div.header-login input.error {
+	background-color: #ffb2b2;
+}
+
+span.invalid {
+	color: #ff3333;
+	margin-right: 15px;
+}
+
+div.header-username a {
+	color: #666;
+	text-decoration: none;
+}
+
+div.header-logout {
+	float: right;
+}
+
+div.header-logout a {
+	color: #666;
+	text-decoration: none;
+}
+
+div#container {
+	width: 100%;
+	margin-left: 30px;
+	margin-top: 20px;
+	text-align: center;
+}
+div#nav-reports {
+	width: 25%;
+	float: left;
+	margin: 15px;
+	padding: 10px;
+}
+div#nav-controls {
+	width: 25%;
+	float: left;
+	margin: auto;
+	padding: 10px;
+	text-align: center;
+}
+div#pri-video {
+	width: 25%;
+	float: left;
+	margin: 15px;
+	padding: 10px;
+}
+p.nav-title {
+	font-size: 32px;
+	color: #bbbbbb;
+}	
+.centered {
+	text-align: center;
+}
+
+div.baseresult {
+	font-size: 24px;
+	font-family: 'Droid Sans', arial, serif;
+}	
+div.pantiltresult {
+	font-size: 24px;
+	font-family: 'Droid Sans', arial, serif;
+}	
+
+.table-wrapper {
+	float: left;
+}
+
+.subtable {
+	padding-top: 20px;
+	text-align: center;
+	margin: 20px;
+	float: left;
+}
+
+.commandbox {
+	padding-top: 20px;
+	margin: 29px;
+	margin-top: 45px;
+	padding: 10px;
+	text-align: left;
+	float: left;
+	border: 1px solid #999999;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	background-color: #eeeeee;
+}
+
+.commandbox .commandbox-title {
+	text-align: center;
+	width: 110.5%;
+	margin: 5px;
+	line-height: 1.8em;
+	margin-top: -10px;
+	margin-left: -11px;
+	color: #eeeeee;
+	font-family: 'Droid Sans', arial, serif;
+	-moz-border-radius: 8px 8px 0px 0px;
+	border-radius: 8px 8px 0px 0px;
+	background-color: #444444;
+}
+.commandbox ul {
+	padding-left: 14px;
+}
+
+.commandbox ul li {
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 12px;
+	color: #999999;
+}
+
+.subtable table {
+	margin: auto;
+}
+
+.control-title {
+	font-family: 'Droid Sans', arial, serif;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 22px;
+	color: #999999;
+	border-bottom: 1px solid #999999;
+	margin-bottom:  18px;
+}
+
+img.control-button {
+	margin: 0;
+	padding: 0;
+	width: 60px;
+	height: 60px;
+}
+
+img.up.unclicked {
+background:url(../images/arrows.png) -190px 0;
+}
+
+img.stop.unclicked {
+background:url(../images/arrows.png) -190px -63px;
+}
+
+img.down.unclicked {
+background:url(../images/arrows.png) -62px 0;
+}
+
+img.left.unclicked {
+background:url(../images/arrows.png) -125px 0;
+}
+
+img.right.unclicked {
+background:url(../images/arrows.png) 0 0;
+}
+
+img.up.clicked {
+background:url(../images/arrows-clicked.png) -190px 0;
+}
+
+img.stop.clicked {
+background:url(../images/arrows-clicked.png) -190px -63px;
+}
+
+img.down.clicked {
+background:url(../images/arrows-clicked.png) -62px 0;
+}
+
+img.left.clicked {
+background:url(../images/arrows-clicked.png) -125px 0;
+}
+
+img.right.clicked {
+background:url(../images/arrows-clicked.png) 0 0;
+}

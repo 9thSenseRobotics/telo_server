@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration> 
+    <contextName>oculus</contextName>
+    <jmxConfigurator contextName="oculus" />    
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <File>log/oculus.log</File>
+        <Append>false</Append>
+        <BufferedIO>false</BufferedIO>
+        <ImmediateFlush>true</ImmediateFlush>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date - %-5level %logger{35} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    <root>
+        <level value="DEBUG" />
+        <appender-ref ref="FILE" />
+    </root>
+    <logger name="com.example">
+        <level value="DEBUG" />
+    </logger>
+</configuration>
