@@ -64893,3 +64893,395 @@ PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on l
 1337983795 [DEBUG]: Calling presence_handler
 1337983795 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [away] 
 1337983795 [DEBUG]: EVENT: presence
+1337987334 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' type='unavailable'/>
+1337987334 [DEBUG]: Calling presence_handler
+1337987334 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [unavailable] 
+1337987334 [DEBUG]: EVENT: presence
+1337987334 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='4139103433'> <show>xa</show>
+ <x xmlns='vcard-temp:x:update'/>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='l/9qR4J0fdZlmAQP1x05a9GT6rk=' ext='pmuc-v1'/>
+</presence>
+1337987334 [DEBUG]: Calling presence_handler
+1337987334 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [xa] 
+1337987334 [DEBUG]: EVENT: presence
+1337987335 [VERBOSE]: RECV: <presence xmlns='jabber:client' from='helo.three@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.five@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.one@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.four@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.zero@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='4139103433'> <delay xmlns='urn:xmpp:delay' from='receiver@9thsense.com/0c1badfb' stamp='2012-05-25T23:08:54Z'/><x xmlns='jabber:x:delay' from='receiver@9thsense.com/0c1badfb' stamp='20120525T23:08:54'/><show>xa</show>
+ <x xmlns='vcard-temp:x:update'/>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='l/9qR4J0fdZlmAQP1x05a9GT6rk=' ext='pmuc-v1'/>
+</presence>
+1337987335 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987335 [DEBUG]: Presence: helo.three@9thsense.com [unavailable] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987335 [DEBUG]: Presence: helo.five@9thsense.com [unavailable] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987335 [DEBUG]: Presence: helo.one@9thsense.com [unavailable] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987335 [DEBUG]: Presence: helo.four@9thsense.com [unavailable] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987335 [DEBUG]: Presence: helo.zero@9thsense.com [unavailable] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+1337987335 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [xa] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='4241292333'> <show>xa</show>
+ <x xmlns='vcard-temp:x:update'/>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='pvrrS4SKjMfaIS3krly86IqidUI=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='4244292847'> <show>xa</show>
+ <x xmlns='vcard-temp:x:update'/>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='VGifDTtD2+BfRlyvJ6I+zF0/c80=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='134330198'> <show>xa</show>
+ <x xmlns='vcard-temp:x:update'/>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='SIoxhuFIpEmNni2Kf2rAo2zRDcM=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='111569012'> <show>xa</show>
+ <x xmlns='vcard-temp:x:update'> <photo/>
+</x>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='SIoxhuFIpEmNni2Kf2rAo2zRDcM=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence>
+1337987335 [DEBUG]: Calling presence_handler
+1337987335 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [xa] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+1337987335 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [xa] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+1337987335 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [xa] 
+1337987335 [DEBUG]: EVENT: presence
+1337987335 [DEBUG]: Calling presence_handler
+1337987335 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [xa] 
+1337987335 [DEBUG]: EVENT: presence
+1337987337 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='182724732'> <x xmlns='vcard-temp:x:update'> <photo/>
+</x>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='SIoxhuFIpEmNni2Kf2rAo2zRDcM=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence>
+1337987337 [DEBUG]: Calling presence_handler
+1337987337 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [available] 
+1337987337 [DEBUG]: EVENT: presence
+1337987428 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/Alainas-MacBook-Air'><c xmlns='http://jabber.org/protocol/caps' ver='VUFD6HcFmUT2NxJkBGCiKlZnS3M=' hash='sha-1' node='http://pidgin.im/'/><x xmlns='vcard-temp:x:update'><photo>3c1d6efd4551a3c96760784e68d1d27219fa65b9</photo></x></presence>
+1337987428 [DEBUG]: Calling presence_handler
+1337987428 [DEBUG]: Presence: receiver@9thsense.com/Alainas-MacBook-Air [available] 
+1337987428 [DEBUG]: EVENT: presence
+1337987428 [VERBOSE]: RECV: <presence xmlns='jabber:client' from='helo.three@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.five@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.one@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.four@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' from='helo.zero@9thsense.com' to='receiver@9thsense.com/xmpphp' type='unavailable'/><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/Alainas-MacBook-Air'><delay xmlns='urn:xmpp:delay' from='receiver@9thsense.com/Alainas-MacBook-Air' stamp='2012-05-25T23:10:28Z'/><x xmlns='jabber:x:delay' from='receiver@9thsense.com/Alainas-MacBook-Air' stamp='20120525T23:10:28'/><c xmlns='http://jabber.org/protocol/caps' ver='VUFD6HcFmUT2NxJkBGCiKlZnS3M=' hash='sha-1' node='http://pidgin.im/'/><x xmlns='vcard-temp:x:update'><photo>3c1d6efd4551a3c96760784e68d1d27219fa65b9</photo></x></presence><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='182724732'> <delay xmlns='urn:xmpp:delay' from='receiver@9thsense.com/0c1badfb' stamp='2012-05-25T23:08:57Z'/><x xmlns='jabber:x:delay' from='receiver@9thsense.com/0c1badfb' stamp='20120525T23:08:57'/><x xmlns='vcard-temp:x:update'> <photo/>
+</x>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='SIoxhuFIpEmNni2Kf2rAo2zRDcM=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence>
+1337987428 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987428 [DEBUG]: Presence: helo.three@9thsense.com [unavailable] 
+1337987428 [DEBUG]: EVENT: presence
+1337987428 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987428 [DEBUG]: Presence: helo.five@9thsense.com [unavailable] 
+1337987428 [DEBUG]: EVENT: presence
+1337987428 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987428 [DEBUG]: Presence: helo.one@9thsense.com [unavailable] 
+1337987428 [DEBUG]: EVENT: presence
+1337987429 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987429 [DEBUG]: Presence: helo.four@9thsense.com [unavailable] 
+1337987429 [DEBUG]: EVENT: presence
+1337987429 [DEBUG]: Calling presence_handler
+PHP Notice:  Undefined offset: 1 in /var/www/9thsense/tc2/xmpphp/Roster.php on line 121
+1337987429 [DEBUG]: Presence: helo.zero@9thsense.com [unavailable] 
+1337987429 [DEBUG]: EVENT: presence
+1337987429 [DEBUG]: Calling presence_handler
+1337987429 [DEBUG]: Presence: receiver@9thsense.com/Alainas-MacBook-Air [available] 
+1337987429 [DEBUG]: EVENT: presence
+1337987429 [DEBUG]: Calling presence_handler
+1337987429 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [available] 
+1337987429 [DEBUG]: EVENT: presence
+1337987429 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='4300916921'> <x xmlns='vcard-temp:x:update'/>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='SIoxhuFIpEmNni2Kf2rAo2zRDcM=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence><presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='receiver@9thsense.com/0c1badfb' id='213427451'> <x xmlns='vcard-temp:x:update'> <photo/>
+</x>
+ <c xmlns='http://jabber.org/protocol/caps' hash='sha-1' node='http://telepathy.freedesktop.org/caps' ver='SIoxhuFIpEmNni2Kf2rAo2zRDcM=' ext='pmuc-v1 voice-v1 video-v1'/>
+</presence>
+1337987429 [DEBUG]: Calling presence_handler
+1337987429 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [available] 
+1337987429 [DEBUG]: EVENT: presence
+1337987429 [DEBUG]: Calling presence_handler
+1337987429 [DEBUG]: Presence: receiver@9thsense.com/0c1badfb [available] 
+1337987429 [DEBUG]: EVENT: presence
+1337987436 [VERBOSE]: RECV: <presence xmlns='jabber:client' to='receiver@9thsense.com/xmpphp' from='helo.five@9thsense.com/Alainas-MacBook-Air'><c xmlns='http://jabber.org/protocol/caps' ver='VUFD6HcFmUT2NxJkBGCiKlZnS3M=' hash='sha-1' node='http://pidgin.im/'/><x xmlns='vcard-temp:x:update'><photo>3c1d6efd4551a3c96760784e68d1d27219fa65b9</photo></x></presence>
+1337987436 [DEBUG]: Calling presence_handler
+1337987436 [DEBUG]: Presence: helo.five@9thsense.com/Alainas-MacBook-Air [available] 
+1337987436 [DEBUG]: EVENT: presence
+1337987457 [VERBOSE]: RECV: <message xmlns='jabber:client' from='helo.five@9thsense.com/Alainas-MacBook-Air' to='receiver@9thsense.com/xmpphp' id='purple698cf080' type='chat'><composing xmlns='http://jabber.org/protocol/chatstates'/></message>
+1337987457 [DEBUG]: Calling message_handler
+PHP Notice:  Trying to get property of non-object in /var/www/9thsense/tc2/xmpphp/XMPP.php on line 233
+PHP Notice:  Trying to get property of non-object in /var/www/9thsense/tc2/xmpphp/XMPP.php on line 235
+1337987457 [DEBUG]: Message: 
+1337987457 [DEBUG]: EVENT: message
+array(2) {
+  [0]=>
+  string(7) "message"
+  [1]=>
+  array(4) {
+    ["type"]=>
+    string(4) "chat"
+    ["from"]=>
+    string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+    ["body"]=>
+    NULL
+    ["xml"]=>
+    object(XMPPHP_XMLObj)#10 (5) {
+      ["name"]=>
+      string(7) "message"
+      ["ns"]=>
+      string(13) "jabber:client"
+      ["attrs"]=>
+      array(5) {
+        ["xmlns"]=>
+        string(13) "jabber:client"
+        ["from"]=>
+        string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+        ["to"]=>
+        string(28) "receiver@9thsense.com/xmpphp"
+        ["id"]=>
+        string(14) "purple698cf080"
+        ["type"]=>
+        string(4) "chat"
+      }
+      ["subs"]=>
+      array(1) {
+        [0]=>
+        object(XMPPHP_XMLObj)#4 (5) {
+          ["name"]=>
+          string(9) "composing"
+          ["ns"]=>
+          string(37) "http://jabber.org/protocol/chatstates"
+          ["attrs"]=>
+          array(1) {
+            ["xmlns"]=>
+            string(37) "http://jabber.org/protocol/chatstates"
+          }
+          ["subs"]=>
+          array(0) {
+          }
+          ["data"]=>
+          string(0) ""
+        }
+      }
+      ["data"]=>
+      string(0) ""
+    }
+  }
+}
+1337987458 [VERBOSE]: RECV: <message xmlns='jabber:client' from='helo.five@9thsense.com/Alainas-MacBook-Air' to='receiver@9thsense.com/xmpphp' id='purple698cf081' type='chat'><active xmlns='http://jabber.org/protocol/chatstates'/><body>&lt;m&gt;&lt;t&gt;1337970913.1336632941805&lt;/t&gt;&lt;d&gt;receiver@9thsense.com&lt;/d&gt;&lt;r&gt;helo.zero@9thsense.com&lt;/r&gt;&lt;re&gt;a&lt;/re&gt;&lt;co&gt;commCheckServer&lt;/co&gt;&lt;/m&gt;</body></message>
+1337987458 [DEBUG]: Calling message_handler
+1337987458 [DEBUG]: Message: <m><t>1337970913.1336632941805</t><d>receiver@9thsense.com</d><r>helo.zero@9thsense.com</r><re>a</re><co>commCheckServer</co></m>
+1337987458 [DEBUG]: EVENT: message
+array(2) {
+  [0]=>
+  string(7) "message"
+  [1]=>
+  array(4) {
+    ["type"]=>
+    string(4) "chat"
+    ["from"]=>
+    string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+    ["body"]=>
+    string(129) "<m><t>1337970913.1336632941805</t><d>receiver@9thsense.com</d><r>helo.zero@9thsense.com</r><re>a</re><co>commCheckServer</co></m>"
+    ["xml"]=>
+    object(XMPPHP_XMLObj)#9 (5) {
+      ["name"]=>
+      string(7) "message"
+      ["ns"]=>
+      string(13) "jabber:client"
+      ["attrs"]=>
+      array(5) {
+        ["xmlns"]=>
+        string(13) "jabber:client"
+        ["from"]=>
+        string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+        ["to"]=>
+        string(28) "receiver@9thsense.com/xmpphp"
+        ["id"]=>
+        string(14) "purple698cf081"
+        ["type"]=>
+        string(4) "chat"
+      }
+      ["subs"]=>
+      array(2) {
+        [0]=>
+        object(XMPPHP_XMLObj)#8 (5) {
+          ["name"]=>
+          string(6) "active"
+          ["ns"]=>
+          string(37) "http://jabber.org/protocol/chatstates"
+          ["attrs"]=>
+          array(1) {
+            ["xmlns"]=>
+            string(37) "http://jabber.org/protocol/chatstates"
+          }
+          ["subs"]=>
+          array(0) {
+          }
+          ["data"]=>
+          string(0) ""
+        }
+        [1]=>
+        object(XMPPHP_XMLObj)#12 (5) {
+          ["name"]=>
+          string(4) "body"
+          ["ns"]=>
+          string(13) "jabber:client"
+          ["attrs"]=>
+          array(0) {
+          }
+          ["subs"]=>
+          array(0) {
+          }
+          ["data"]=>
+          string(129) "<m><t>1337970913.1336632941805</t><d>receiver@9thsense.com</d><r>helo.zero@9thsense.com</r><re>a</re><co>commCheckServer</co></m>"
+        }
+      }
+      ["data"]=>
+      string(0) ""
+    }
+  }
+}
+MessageFromRobot responseValue is a
+1337987458 [VERBOSE]: Socket is ready; send it.
+1337987458 [VERBOSE]: SENT: <message from="receiver@9thsense.com/xmpphp" to="helo.five@9thsense.com" type='chat'><body>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;m&gt;&lt;t&gt;1337987458.6611&lt;/t&gt;&lt;d&gt;receiver@9thsense.com&lt;/d&gt;&lt;dn&gt;Receiver&lt;/dn&gt;&lt;r&gt;helo.five@9thsense.com&lt;/r&gt;&lt;c&gt;!&lt;/c&gt;&lt;a&gt;alive&lt;/a&gt;&lt;co&gt;&lt;/co&gt;&lt;/m&gt;
+</body></message>
+1337987458 [VERBOSE]: Successfully sent 375 bytes.
+Replying with this message to robot helo.five@9thsense.com: <?xml version="1.0"?>
+<m><t>1337987458.6611</t><d>receiver@9thsense.com</d><dn>Receiver</dn><r>helo.five@9thsense.com</r><c>!</c><a>alive</a><co></co></m>
+
+1337987458 [VERBOSE]: RECV: <message xmlns='jabber:client' from='helo.five@9thsense.com/Alainas-MacBook-Air' to='receiver@9thsense.com/xmpphp' id='purple698cf082' type='chat'><active xmlns='http://jabber.org/protocol/chatstates'/></message>
+1337987458 [DEBUG]: Calling message_handler
+PHP Notice:  Trying to get property of non-object in /var/www/9thsense/tc2/xmpphp/XMPP.php on line 233
+PHP Notice:  Trying to get property of non-object in /var/www/9thsense/tc2/xmpphp/XMPP.php on line 235
+1337987458 [DEBUG]: Message: 
+1337987458 [DEBUG]: EVENT: message
+array(2) {
+  [0]=>
+  string(7) "message"
+  [1]=>
+  array(4) {
+    ["type"]=>
+    string(4) "chat"
+    ["from"]=>
+    string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+    ["body"]=>
+    NULL
+    ["xml"]=>
+    object(XMPPHP_XMLObj)#16 (5) {
+      ["name"]=>
+      string(7) "message"
+      ["ns"]=>
+      string(13) "jabber:client"
+      ["attrs"]=>
+      array(5) {
+        ["xmlns"]=>
+        string(13) "jabber:client"
+        ["from"]=>
+        string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+        ["to"]=>
+        string(28) "receiver@9thsense.com/xmpphp"
+        ["id"]=>
+        string(14) "purple698cf082"
+        ["type"]=>
+        string(4) "chat"
+      }
+      ["subs"]=>
+      array(1) {
+        [0]=>
+        object(XMPPHP_XMLObj)#18 (5) {
+          ["name"]=>
+          string(6) "active"
+          ["ns"]=>
+          string(37) "http://jabber.org/protocol/chatstates"
+          ["attrs"]=>
+          array(1) {
+            ["xmlns"]=>
+            string(37) "http://jabber.org/protocol/chatstates"
+          }
+          ["subs"]=>
+          array(0) {
+          }
+          ["data"]=>
+          string(0) ""
+        }
+      }
+      ["data"]=>
+      string(0) ""
+    }
+  }
+}
+1337987467 [VERBOSE]: RECV: <message xmlns='jabber:client' from='helo.five@9thsense.com/Alainas-MacBook-Air' to='receiver@9thsense.com/xmpphp' id='purple698cf083' type='chat'><body>&lt;m&gt;&lt;t&gt;1337971431.1336633459861&lt;/t&gt;&lt;d&gt;receiver@9thsense.com&lt;/d&gt;&lt;r&gt;helo.zero@9thsense.com&lt;/r&gt;&lt;re&gt;a&lt;/re&gt;&lt;co/&gt;&lt;/m&gt;</body></message>
+1337987467 [DEBUG]: Calling message_handler
+1337987467 [DEBUG]: Message: <m><t>1337971431.1336633459861</t><d>receiver@9thsense.com</d><r>helo.zero@9thsense.com</r><re>a</re><co/></m>
+1337987467 [DEBUG]: EVENT: message
+array(2) {
+  [0]=>
+  string(7) "message"
+  [1]=>
+  array(4) {
+    ["type"]=>
+    string(4) "chat"
+    ["from"]=>
+    string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+    ["body"]=>
+    string(110) "<m><t>1337971431.1336633459861</t><d>receiver@9thsense.com</d><r>helo.zero@9thsense.com</r><re>a</re><co/></m>"
+    ["xml"]=>
+    object(XMPPHP_XMLObj)#11 (5) {
+      ["name"]=>
+      string(7) "message"
+      ["ns"]=>
+      string(13) "jabber:client"
+      ["attrs"]=>
+      array(5) {
+        ["xmlns"]=>
+        string(13) "jabber:client"
+        ["from"]=>
+        string(42) "helo.five@9thsense.com/Alainas-MacBook-Air"
+        ["to"]=>
+        string(28) "receiver@9thsense.com/xmpphp"
+        ["id"]=>
+        string(14) "purple698cf083"
+        ["type"]=>
+        string(4) "chat"
+      }
+      ["subs"]=>
+      array(1) {
+        [0]=>
+        object(XMPPHP_XMLObj)#19 (5) {
+          ["name"]=>
+          string(4) "body"
+          ["ns"]=>
+          string(13) "jabber:client"
+          ["attrs"]=>
+          array(0) {
+          }
+          ["subs"]=>
+          array(0) {
+          }
+          ["data"]=>
+          string(110) "<m><t>1337971431.1336633459861</t><d>receiver@9thsense.com</d><r>helo.zero@9thsense.com</r><re>a</re><co/></m>"
+        }
+      }
+      ["data"]=>
+      string(0) ""
+    }
+  }
+}
+MessageFromRobot responseValue is a
+1337987467 [VERBOSE]: Socket is ready; send it.
+1337987467 [VERBOSE]: SENT: <message from="receiver@9thsense.com/xmpphp" to="helo.five@9thsense.com" type='chat'><body>&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;m&gt;&lt;t&gt;1337987467.6782&lt;/t&gt;&lt;d&gt;receiver@9thsense.com&lt;/d&gt;&lt;dn&gt;Receiver&lt;/dn&gt;&lt;r&gt;helo.five@9thsense.com&lt;/r&gt;&lt;c&gt;!&lt;/c&gt;&lt;a&gt;alive&lt;/a&gt;&lt;co&gt;&lt;/co&gt;&lt;/m&gt;
+</body></message>
+1337987467 [VERBOSE]: Successfully sent 375 bytes.
+Replying with this message to robot helo.five@9thsense.com: <?xml version="1.0"?>
+<m><t>1337987467.6782</t><d>receiver@9thsense.com</d><dn>Receiver</dn><r>helo.five@9thsense.com</r><c>!</c><a>alive</a><co></co></m>
+
