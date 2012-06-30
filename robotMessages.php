@@ -54,6 +54,12 @@
 	 	
 */
 
+function microtime_long()
+{
+	$time = microtime(true);
+	return preg_replace('/\./', '', $time);
+}
+
 class robotMessages 
 // Base class for all robot messages. Specifies the properties contained within the XML as well
 // as $this->XML, which is a SimpleXML element that can be interacted with normally.
@@ -81,7 +87,7 @@ class robotMessages
 	
 	function __construct() 
     { 
-    	$this->timeStamp = microtime(true); // get timestamp at instantiation
+    	$this->timeStamp = microtime_long(); // get timestamp at instantiation
     	
     	// default constructor because PHP doesn't support overloading
         $a = func_get_args(); 

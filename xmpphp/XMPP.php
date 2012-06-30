@@ -86,7 +86,7 @@ class XMPPHP_XMPP extends XMPPHP_XMLStream {
 	/**
 	 * @var boolean
 	 */
-	protected $use_encryption = true;
+	protected $use_encryption = false;
 	
 	/**
 	 * @var boolean

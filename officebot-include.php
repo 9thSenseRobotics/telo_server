@@ -3,6 +3,8 @@
 mysql_connect("localhost", "9thsense", "~FERmion") or die ("We are sorry, we have experienced database error 1043. Please email support@9thsense.com for assistance.");
 mysql_select_db("9thsense") or die ("We are sorry, we have experienced database error 1151. Please email support@9thsense.com for assistance.");
 
+openlog  ("9STC", LOG_ODELAY | LOG_PID, LOG_LOCAL0);
+
 $robotname = "robot@9thsense.com";
 
 $receiverAddress = "receiver@9thsense.com";

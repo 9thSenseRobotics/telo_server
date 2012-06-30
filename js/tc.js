@@ -1,7 +1,9 @@
 speedSliderDefaultValue = 220;
+tiltAngle = 15;
 driving_state = 'stopped';
 canControl = true;
 must_be_logged_in = 'You must be logged in to drive a robot. Please enter a valid username and password, click the "Log in" button, and try again.';
+waking_state = 'other';
 
 $(document).ready(function() {
 	$("#speed-slider").slider({
@@ -18,6 +20,32 @@ $(document).ready(function() {
 		$('#speed-slider').slider('value', speedSliderDefaultValue);
 		$('.message-row').hide();
 	});
+	$('.commandbox').draggable();
+//								<a id="powerToggle"><img alt="Put robot to sleep" id="state-image" class="sleep" src="images/sleeping.png"></a>
+	$('a#power-toggle').click(function() {
+		var childImage = $(this).children('img');
+		if (childImage.hasClass('sleep'))
+		{
+			waking_state = 'sleep';
+		} else if (childImage.hasClass('wake')) {
+			waking_state = 'wake';
+		} else {
+			waking_state = 'other';
+		}
+		childImage.attr('src', 'images/spinning.gif').removeClass('sleep').removeClass('wake').addClass('spinning');
+		$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&cmd=p', function(data) {
+			console.log(data);
+			if (waking_state == 'sleep')
+			{
+				childImage.attr('src', 'images/sleeping.png').removeClass('sleep').removeClass('spinning').addClass('wake');
+			} else if (waking_state == 'wake') {
+				childImage.attr('src', 'images/awake.png').removeClass('sleep').removeClass('spinning').addClass('wake');
+			} else {
+				childImage.attr('src', 'images/frozen.png').removeClass('sleep').removeClass('spinning').addClass('wake');
+			}
+		});
+	});
+	$('.commandbox').draggable();
 });
 
 function updatePageWithJSON(data)
@@ -33,6 +61,13 @@ function updatePageWithJSON(data)
 		$('.message-row').show();
 	}
 }
+
+function updatePageForTimeout(data)
+{
+	jQuery('#latency').html("Timed out");
+	jQuery('#status').html("Timed out");
+}
+
 
 function unclick_buttons()
 {
@@ -96,9 +131,23 @@ function send_base_command (cmd)
 		window.driving_state = 'stopped';
 	}
 // 	console.log('driving_state is ' + driving_state);	
-	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&speed=' + jQuery('#speed-slider').slider('value') + '&cmd=' + cmd, function(data) {
-		updatePageWithJSON(data);
-	});
+	$.ajax({
+        type: "GET",
+        url: "officebot-controller.php",
+        data: { robotAddr: jQuery('#robotAddr').val(), speed: jQuery('#speed-slider').slider('value'), cmd: cmd },
+        dataType: "json",
+        timeout: 2500, // in milliseconds
+        success: function(data) {
+        	updatePageWithJSON(data);
+        },
+        error: function(request, status, err) {
+          updatePageForTimeout();
+        }
+    });
+// 	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + 
+// 		'&speed=' + jQuery('#speed-slider').slider('value') + '&cmd=' + cmd, function(data) {
+// 			updatePageWithJSON(data);
+// 	});
 // 	$.get('telorun.php?phoneid=758fa234cb7edb05&payload=' + cmd, function(data) {
 // 	});
 }
@@ -141,11 +190,23 @@ function send_pantilt_command (cmd)
 			unclick_buttons();
 			break;
 	}
-	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&pantilt=' + cmd, function(data) {
-		unclick_buttons();
-		updatePageWithJSON(data);
-	});
-// 	$.get('telorun.php?phoneid=758fa234cb7edb05&payload=' + cmd, function(data) {
+	$.ajax({
+        type: "GET",
+        url: "officebot-controller.php",
+        data: { robotAddr: jQuery('#robotAddr').val(), speed: tiltAngle, pantilt: cmd },
+        dataType: "json",
+        timeout: 2500, // in milliseconds
+        success: function(data) {
+        	unclick_buttons();
+        	updatePageWithJSON(data);
+        },
+        error: function(request, status, err) {
+          updatePageForTimeout();
+        }
+    });
+// 	$.post('officebot-controller.php?robotAddr=' + jQuery('#robotAddr').val() + '&pantilt=' + cmd + "&speed=" + tiltAngle, function(data) {
+// 		unclick_buttons();
+// 		updatePageWithJSON(data);
 // 	});
 	
 }

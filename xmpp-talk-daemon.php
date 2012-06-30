@@ -37,34 +37,14 @@ while (true) // PHP is smart about resource usage here
 		*/
 		list($a, $t, $c, $s) = preg_split("/\|/", $string);
 		
-		// now comes a bunch of code to handle old (0.9) robots, which is currently just Calypso.
-		
-		// if this robot isn't in the versonArray, default it to 0.9. Will be nice to do away with this!
-		if (!isset($robotVersionArray[$a]))
-		{
-			$robotVersionArray[$a] = "0.9";
-		}
-		
-		/* 
-		 If it's an old bot, all you're sending to the bot is the command. If it's a new 1.0-enabled bot,
-		 we're going to compose a MessageToRobot.
-		 */		
-		switch ($robotVersionArray[$a])
-		{
-			case "0.9":
-				$sendStr = $c;
-				break;
-			case "1.0":
-			default:
-				$mtr = new messageToRobot($a, $a, $a, trim($c), trim($s), '', $t);
-				$sendStr = $mtr->XML->asXML();
-				break;
-		}
-		
+		$mtr = new messageToRobot($a, $a, $a, trim($c), trim($s), '', $t);
+		$sendStr = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $mtr->XML->asXML());
+		echo "$sendStr\n\n";
 		// Send the XMPP message
 		$conn->message($a, $sendStr);
+	    syslog (LOG_NOTICE, "$a: Controller sent message to robot: $sendStr");
 		
-		$t=microtime();
+		$t=microtime(true);
 		$payloads = $conn->processUntil('message', 1);
 		
 		// get the response from the robot
@@ -76,25 +56,17 @@ while (true) // PHP is smart about resource usage here
 			{
 				// start to compose the response JSON that we're going to send back through the socket
 				// to the web interface.
-				$json['microDuration'] = microtime() - $t;
+				$json['microDuration'] = microtime(true) - $t;
 				$json['robot'] = $from;
+			    syslog (LOG_NOTICE, "$from: Controller received response from robot: {$pl['body']}");
 				
-				// set the version array, and set up the JSON response accordingly.
-				if (preg_match("/\</",$pl['body']))
-				{
-					$robotVersionArray[$a] = '1.0';
-					try {
-						$mfr = new messageFromRobot($pl['body']);
-						$json['response'] = $mfr->responseValue;
-					} catch (Exception $e) {
-						echo "Could not construct messageFromRobot from body:" . $e->getMessage();
-					}
-				} else {
-					$robotVersionArray[$a] = '0.9';
-					$json['response'] = $pl['body'];
-				}
+				$mfr = new messageFromRobot($pl['body']);
+				$json['response'] = $mfr->responseValue;
+				$json['version'] = "1.0";
+
+
+
 				$json['status'] = 'ok';
-				$json['version'] = $robotVersionArray[$a];
 				$json['latency'] = microtime(true) - $latency;
 				$jsonStr = json_encode ($json);
 				//print_r($robotVersionArray);

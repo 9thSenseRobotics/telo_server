@@ -254,7 +254,7 @@ The 9th Sense Team
 						<? //if ($user['email'] == 'helo.five@9thsense.com') { ?>
 						<tr>
 							<td class="centered" colspan="3">
-								<div class="control-title">Speed:</div> 
+								<div class="control-title">Speed</div> 
 								<div id="speed-slider"></div>
 								<div class="slider-labels">
 								<span class="float-left">Slow</span>
@@ -274,6 +274,15 @@ The 9th Sense Team
 						</tr>
 						<tr>
 							<td class="centered" colspan="3"> <img alt="tilt down" id="button-pantilt-down" class="control-button unclicked down" src="images/img_trans.gif" /></td>
+						</tr>
+						<tr>
+							<td class="centered" style="height: 60px;" colspan="3">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="centered" colspan="3">
+								<div class="control-title">Wake/Sleep</div> 
+								<a id="power-toggle"><img alt="Put robot to sleep" id="state-image" class="sleep" src="images/sleeping.png"></a>
+							</td>
 						</tr>
 					</table>
 				</div> <!-- end div .subtable -->

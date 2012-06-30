@@ -26,9 +26,9 @@ function robotMessageToUser($robotAddress, $message)
 
 // connect to the XMPP server; log only errors
 $conn = new XMPPHP_XMPP('9thsense.com', 5222, 'receiver', 
-	'9thsense', 'xmpphp', '9thsense.com', true, XMPPHP_Log::LEVEL_ERROR);
+	'9thsense', 'xmpphp', '9thsense.com', true, XMPPHP_Log::LEVEL_DEBUG);
 $conn->connect();
-$conn->autoSubscribe(true);
+//$conn->autoSubscribe(true);
 $conn->processUntil('session_start');
 $conn->presence($status="Receiver available.");
 echo "Available now.\n";

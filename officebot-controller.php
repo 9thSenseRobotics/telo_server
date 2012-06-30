@@ -1,9 +1,10 @@
 <?php
 
-require_once('officebot-include.php'); 
+require_once('officebot-include.php');
+error_reporting(0); 
 include ('robotMessages.php');
 
-$phonereg = '758fa234cb7edb05';
+//$phonereg = '758fa234cb7edb05';
 /**
  * Gets an authentication token for a Google service (defaults to
  * Picasa). Puts the token in a session variable and re-uses it as
@@ -88,6 +89,7 @@ function sendAndroidPush($datain, $serverAuth, $phoneRegistrationId)
     $response = curl_exec($ch);
 //    echo $response;
     curl_close($ch);
+	return ($response);
 }
 
 function is_valid_create_command($cmd)
@@ -115,7 +117,8 @@ function is_valid_robot_command($cmd)
 function robot_command($cmd)
 {
 	global $conn, $createActionTable, $robotname, $sendStr, $phonereg;
-	$ts = microtime(true);
+	$ts = microtime_long();
+	$latency = microtime(true);
 	$commandSocket = socket_create (AF_INET, SOCK_STREAM, 0);
 	socket_set_option($commandSocket,SOL_SOCKET,SO_RCVTIMEO,array("sec"=>2, "usec"=>500));
 	socket_bind($commandSocket, '127.0.0.1');
@@ -128,10 +131,11 @@ function robot_command($cmd)
 	} else {
 		$s = '';
 	}
-	socket_write($commandSocket, "{$_REQUEST['robotAddr']}|$ts|$cmd|$s|\n");	
+	$xmppStr = "{$_REQUEST['robotAddr']}|$ts|$cmd|$s|\n";
+	socket_write($commandSocket, $xmppStr);	
 	$json = socket_read($commandSocket, 1500);
 //	echo "json is $json";
-	$jArr = json_decode($json);
+	$jArr = (array)json_decode($json);
 	$alertMessage = getRobotMessage($_REQUEST['robotAddr']);
 	if ($alertMessage != null)
 	{
@@ -142,31 +146,39 @@ function robot_command($cmd)
 	if (!isset($jArr['status'])) // there was no response from the server, so forge it
 	{
 		$jArr['status'] = 'timeout - no response from robot';
-		$jArr['latency'] = microtime(true) - $ts;
+		$jArr['latency'] = microtime(true) - $latency;
 	}
 	$json = json_encode($jArr);
 	 
 	socket_set_nonblock($commandSocket);
 	socket_close($commandSocket);
-	$phoneid = $phonereg;
-	$sql = "SELECT * FROM phones WHERE deviceid=\"" . mysql_real_escape_string($phoneid) . "\"";
+	list($phoneName, $domain) = preg_split("/@/", $_REQUEST['robotAddr']);
+	$sql = "SELECT * FROM phones WHERE name=\"" . mysql_real_escape_string($phoneName) . "\" OR name=\"" . mysql_real_escape_string($_REQUEST['robotAddr']) . "\" ";
 	$result = mysql_query($sql);
 	$myrow = mysql_fetch_array($result);
 	
 	if (strlen($myrow["registration"]) > 0) {
 		$phoneReg = $myrow["registration"];
+		$deviceId = $myrow["deviceid"];
 	}
 	$a = $_REQUEST['robotAddr'];
 	if ($cmd != 'u' || $cmd != 'n')
 	{
-		$speed = '220';
+		$speed = $s;
 	} else {
 		$speed = '';
 	}
 	$mtr = new messageToRobot($a, $a, $a, $cmd, $speed, '', $ts);
 	$ts = $mtr->timeStamp;
-	$sendStr = $mtr->XML->asXML();
-	sendAndroidPush($sendStr, $_SESSION["auth_token"], $phoneReg);
+	$sendStr = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $mtr->XML->asXML());
+
+    syslog (LOG_NOTICE, "{$_REQUEST['robotAddr']}: Web interface message passed to controller: $sendStr");
+	if (sendAndroidPush($sendStr, $_SESSION["auth_token"], $phoneReg))
+	{
+	    syslog (LOG_NOTICE, "{$_REQUEST['robotAddr']}: C2DM message passed to Google for device ID $deviceId: $sendStr");
+	} else {
+	    syslog (LOG_NOTICE, "{$_REQUEST['robotAddr']}: C2DM message FAILED for device ID $deviceId: $sendStr");
+	}
 	if (strlen($json))
 	{
 		return ($json);

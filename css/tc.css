@@ -82,6 +82,10 @@ div.right {
 	color: #999999;
 	margin-top: 6px;
 }
+
+#speed-slider {
+	margin-top: 40px;
+}
 #message-table {
 	font-family: 'Droid Sans', arial, serif;
 	font-size: 12px;
