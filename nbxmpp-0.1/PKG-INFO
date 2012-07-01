@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: nbxmpp
+Version: 0.1
+Summary: Non blocking Jabber/XMPP module
+Home-page: http://python-nbxmpp.gajim.org
+Author: Yann Leboulanger
+Author-email: asterix@lagaule.org
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

@@ -1,0 +1,121 @@
+version 2.1.1
+-------------
+- Updated XMPPSend 'presence', 'message' and 'iq' methods to accept $jaxl instance as first parameter
+  if you are not calling these methods directly from your application code as mentioned in documentation
+  this change should not hurt you 
+- Added more comments to env/jaxl.ini and also added JAXL_LOG_ROTATE ini file option
+- JAXL instance logs can be rotated every x seconds (logRotate config parameter) now
+- Removed config param dumpTime, instead use dumpStat to specify stats dump period
+- Base XMPP class now auto-flush output buffers filled because of library level rate limiter
+- Added more options for JAXL constructor e.g.
+  boshHost, boshPort, boshSuffix, pidPath, logPath, logLevel, dumpStat, dumpTime
+  These param overwrites value specified inside jaxl.ini file
+  Also JAXL core will now periodically dump instance statistics 
+- Added an option in JAXL constructor to disable inbuild core rate limiter 
+- Added support when applications need to connect with external bosh endpoints
+  Bosh application code requires update for ->JAXL0206('startStream') method 
+- XMPPGet::handler replaces ->handler inside XEP-0124
+- JAXLCron job now also passes connected  instance to callback cron methods 
+- Updated base XMPP class now maintains a clock, updated sendXML method to respect library level rate limiting
+- Base JAXL class now includes JAXLCron class for periodically dumping connected bot memory/usage stats
+- First version of JAXLCron class for adding periodic jobs in the background
+- XMPP payload handler moves from XMPPGet to base XMPP class, packets are then routed to XMPPGet class for further processing
+- Updated xep-0124 to use instance bosh parameters instead of values defined inside jaxl.ini 
+- Provision to specify custom JAXL_BOSH_HOST inside jaxl.ini 
+- Instead of global logLevel and logPath, logger class now respects indivisual instance log settings
+  Helpful in multiple instance applications 
+- Updated base JAXL class to accept various other configuration parameters inside constructor
+  These param overwrites values defined inside jaxl.ini 
+- XMPPSend::xml method moves inside XMPP::sendXML (call using ->sendXML from within application code), as a part of library core cleanup
+- Updated jaxl class to return back payload from called xep methods
+- XMPP base method getXML can be instructed not to take a nap between stream reads
+- Added jaxl_get_xml hook for taking control over incoming xml payload from xmpp stream
+- Added support for disabling sig term registration, required by applications who already handle this in their core code
+- Added capability of sending multiple message/presence stanza in one go inside jaxl base class
+- Fixed typo in MUC Direct Invitation xep invite method
+- getHandler should have accepted core instance by reference, fixed now. BOSH MUC Chat sample application header is now more appropriate
+
+version 2.1.0
+-------------
+- First checkin of bosh MUC sample application 
+- Updated build file now packages bosh MUC chat sample application along with core classes 
+- Updated JAXLog class to accept  instance inside log() method, application code should use ->log() to call JAXLog::log() method now 
+- Updated JAXLPlugin class to pass  instance along with every XMPP event hook 
+- Updated jaxl_require method to call including XEP's init() method every time they are included using jaxl_require method 
+- Update jaxl.ini with some documentation/comments about JAXL_BOSH_COOKIE_DOMAIN parameter
+- Updated echobot sample application code to pass  instance while calling jaxl_require method 
+- Update XMPP SASL Auth class to accept  instance while calculating SASL response.
+  Also passinginstance when jaxl_get_facebook_key hook is called 
+- Updated XMPP base class to accept component host name inside constructor.
+  Sending currentinstance with every XMPPSend, XMPPGet and JAXLog method calls 
+- Every XMPPGet method now accepts instance.
+  Updated JAXLPlugin execute method call to accept instance and also passing current working instance to JAXLog method calls 
+- Every XMPPSend method now accepts instance.
+  Updated JAXLPlugin execute method call to accept instance and also passing current working  instance to JAXLog method calls 
+- Updated component bot sample application to show how to pass component host inside JAXL constructor.
+  Also updated jaxl_require call to accept current working  instance 
+- Updated boshchat sample application to follow new rules of jaxl_require, also cleaned up the sample app code a bit 
+- Updated jaxl.ini of packaged sample applications to match /env/jaxl.ini 
+- Updated implemented XEP's init method to accept instance during initialization step
+  Send working instance with every XMPPSend method call
+  Almost every XEP's available method now accepts an additional instance so that XEP's can work independently for every  instance inside a multiple jaxl instance application code 
+- Added magic method __call inside JAXL class
+  All application codes should now call a methods inside implemented XEP's like ->JAXLxxxx('method', , , ...)
+  Also added ->log method to be used by application codes
+  JAXLog::log() should not be called directly from application code
+  Updated XMPPSend methods to accept instance
+  Added ->requires() method that does a similar job as jaxl_require() which now also expects  instance as one of the passed parameter. 
+
+version 2.0.4
+-------------
+- Updated XMPP base class and XMPP Get class to utilize new XMPPAuth class
+- Updated jaxl_require method with new XMPPAuth class path
+- Extracted XMPP SASL auth mechanism out of XMPP Get class, code cleanup
+- unwrapBody method of XEP 0124 is now public
+- Added #News block on top of README
+- No more capital true, false, null inside Jaxl core to pass PHP_CodeSniffer tests
+- :retab Jaxl library core to pass PHP_CodeSniffer tests
+- Added Jabber Component Protocol example application bot
+- Updated README with documentation link for Jabber component protocol
+- Updated Entity Caps method to use list of passed feature list for verification code generation
+- Updated MUC available methods doc link inside README
+- Added experimental support for SCRAM-SHA-1, CRAM-MD5 and LOGIN auth mechanisms
+
+version 2.0.3
+-------------
+- Updated Jaxl XML parsing class to handle multiple level nested child cases
+- Updated README and bosh chat application with documentation link
+- Fixed bosh application to run on localhost
+- Added doc links inside echobot sample app
+- Bosh sample application also use entity time XEP-0202 now
+- Fix for sapi detection inside jaxl util
+- jaxl.js updated to handle multiple ajax poll response payloads
+- Bosh session manager now dumps ajax poll response on post handler callback
+- Removed hardcoded ajax poll url inside boshchat application
+- Updated component protocol XEP pre handshake event handling
+
+version 2.0.2
+-------------
+- Packaged XEP 0202 (Entity Time)
+- First checkin of Bosh related XEP 0124 and 0206
+- Sample Bosh Chat example application
+- Updated jaxl.class.php to save Bosh request action parameter
+- jaxl.ini updated with Bosh related cookie options, default loglevel now set to 4
+- jaxl.js checkin which should be used with bosh applications
+- Updated base xmpp classes to provide integrated bosh support
+- Outgoing presence and message stanza's too can include @id attribute now
+
+version 2.0.1
+-------------
+- Typo fix in JAXLXml::$tagMap for errorCode
+- Fix for handling overflooded roster list
+- Packaged XEP 0115 (Entity capability) and XEP 0199 (XMPP Ping)
+- Updated sample echobot to use XEP 0115 and XEP 0199
+- Support for X-FACEBOOK-PLATFORM authentication
+
+version 2.0.0
+--------------
+First checkin of:
+- Restructed core library with event mechanism
+- Packaged XEP 0004, 0030, 0045, 0050, 0085, 0092, 0114, 0133, 0249
+- Sample echobot application
