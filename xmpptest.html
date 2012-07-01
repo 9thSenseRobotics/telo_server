@@ -55,9 +55,10 @@ function xmlIt() {
    onIq: function(iq){
        console.log(iq);
    },onMessage: function(message){
-        console.log("New message of " + message.from + ": "+message.body);
+        console.log("New message from " + message.from + ": "+message.body);
+        jQuery('#response').html(message.body);
    },onPresence: function(presence){
-        console.log("New presence of " + presence.from + " is "+presence.show);
+        console.log("New presence from " + presence.from + " is "+presence.show);
    },onError: function(error){
         console.log("Error: "+error);
    }
@@ -68,12 +69,12 @@ $(document).ready(function() {
 		newDoc = 
 					xmlIt ('m',
 						xmlIt('t', String(microtime(true)).replace('.', '') + '0|' + String(sequenceNumber++)),
-						xmlIt('d', "helo.five@9thsense.com"),
-						xmlIt('dn', "helo.five@9thsense.com"),
-						xmlIt('r', "helo.five@9thsense.com"),
-						xmlIt('c', "x"),
-						xmlIt('a', "220"),
-						xmlIt('co', "")
+						xmlIt('d', jQuery('#robotTo').val()),
+						xmlIt('dn', jQuery('#robotTo').val()),
+						xmlIt('r', jQuery('#robotTo').val()),
+						xmlIt('c', jQuery('#robotCommand').val()),
+						xmlIt('a', jQuery('#robotCommandArguments').val()),
+						xmlIt('co', jQuery('#robotComment').val())
 					);
 		var tmp = document.createElement("div");
 		tmp.appendChild(newDoc);
@@ -87,7 +88,15 @@ $(document).ready(function() {
 </script>
 </head>
 <body>
-Send this string: <input type="text" class="field" size="30" /> <button class="button">Send it</button>
+Send to: <input type="text" id="robotTo" size="30" value="helo.five@9thsense.com" /><br />
+Command: <input type="text" id="robotCommand" size="2" value="x" /><br />
+Argument: <input type="text" id="robotCommandArguments" size="4" value="220" /><br />
+Comment: <input type="text" id="robotComment" size="30" value="" /><br />
+
+<button class="button">Send it</button>
+<p />
+<strong>Response</strong><br />
+<span style="left-margin: 10px;" id="response"></span><p />
 </body>
 </html>
 
